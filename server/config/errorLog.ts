@@ -2,7 +2,7 @@ import { ENV } from "../utils/env.util";
 import { logger } from "./logger";
 
 export const ErrorLogger = (
-    error?: string | unknown,
+    error?:  unknown,
     customMessage?: string,
 ) => {
     if (error instanceof Error) {

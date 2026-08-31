@@ -6,6 +6,7 @@ import { redis } from "../config/redis";
 import { apiResponse } from "../utils/apiResponse";
 import { ErrorMiddleware } from "../middleware/error.middleware";
 import authRouter from "./modules/auth/auth.route";
+import businessRouter from "./modules/business/core/business.route";
 
 export const app: Express = express();
 
@@ -19,6 +20,7 @@ app.use(
       client: redis,
       prefix: "sewdesk-session:",
     }),
+    rolling: true,
     name: "sewdesk.sid",
     cookie: {
       httpOnly: true,
@@ -30,6 +32,7 @@ app.use(
 const prefix = "/api/v1";
 
 app.use(`${prefix}/auth`, authRouter);
+app.use(`${prefix}/business`, businessRouter);
 
 app.use((req: Request, res: Response) => {
   apiResponse({
