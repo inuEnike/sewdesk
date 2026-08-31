@@ -1,3 +1,6 @@
+import type postgres from "postgres";
+import type { businessDTO } from "./business.schema";
+
 export const BUSINESS_STATUS = {
   PENDING: "pending",
   ACTIVE: "active",
@@ -23,13 +26,52 @@ export interface Business {
   business_email: string;
   slug: string;
   status: BusinessStatus;
-  description: String;
+  description?: string;
   created_at: string;
   updated_at: string;
 }
 
-export interface Repository {
-  getBusinessByBusinessOwnerId: (id: string) => Promise<Business | null>;
-  getAllBusinesses: () => Promise<Business | null>;
+export interface Service {
+  getLoggedInUserBusinesses: (userId: string) => Promise<Business[]>;
   getBusinessBySlug: (slug: string) => Promise<Business | null>;
+  getLoggedInUserBusiness: (id: string, userId: string) => Promise<Business>;
+  createBusiness: (
+    data: businessDTO,
+    ownerId: string,
+  ) => Promise<{ message: string }>;
+  updateBusiness: (
+    id: string,
+    userId: string,
+    data: businessDTO,
+  ) => Promise<{ message: string }>;
+}
+
+export interface Repository {
+  getBusinessesByBusinessOwnerId: (
+    id: string,
+  ) => Promise<postgres.RowList<Business[]>>;
+
+  getBusinessByBusinessIdOwnerId: (
+    id: string,
+    userId: string,
+  ) => Promise<Business | null>;
+
+  getAllBusinesses: () => Promise<Business | null>;
+
+  getBusinessBySlug: (slug: string) => Promise<Business | null>;
+
+  getBusinessByBusinessEmail: (email: string) => Promise<Business | null>;
+
+  getBusinessByBusinessId: (id: string) => Promise<Business | null>;
+
+  createBusiness: (
+    data: businessDTO,
+    ownerId: string,
+  ) => Promise<Business | null>;
+
+  updateBusiness: (
+    id: string,
+    userId: string,
+    data: Partial<businessDTO>,
+  ) => Promise<Business | null>;
 }
