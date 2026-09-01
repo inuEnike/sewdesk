@@ -10,17 +10,14 @@ export const shorthands = undefined;
  */
 export const up = (pgm) => {
   pgm.sql(`
-        CREATE TABLE IF NOT EXISTS business.payments (
+        CREATE TABLE IF NOT EXISTS business.plans(
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-            status TEXT NOT NULL DEFAULT 'pending'     
-            CHECK (status IN ('pending', 'completed', 'cancelled')),    
-            subscription_id UUID REFERENCES business.subscription(id) NOT NULL,
-            amount NUMERIC(12, 2) NOT NULL,
-            payment_reference TEXT NOT NULL UNIQUE,
-            currency CHAR(3) NOT NULL DEFAULT 'NGN',
+            name VARCHAR(30) NOT NULL, 
+            description TEXT NOT NULL,
+            price NUMERIC(12, 2) NOT NULL,
             created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),  
             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-        )
+        );    
     `);
 };
 
@@ -31,6 +28,6 @@ export const up = (pgm) => {
  */
 export const down = (pgm) => {
   pgm.sql(`
-        DROP TABLE IF EXISTS buusiness.payments;    
+        DROP TABLE IF EXISTS business.plans
     `);
 };

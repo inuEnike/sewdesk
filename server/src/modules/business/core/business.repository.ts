@@ -92,13 +92,20 @@ export class BusinessRepository implements Repository {
   };
 
   getAllBusinesses = async (): Promise<Business | null> => {
-    const [businesses] = await this.sql<Business[]>`
+    try {
+      const [businesses] = await this.sql<Business[]>`
       SELECT *
       FROM business.businesses
       ORDER BY business_name
     `;
 
-    return businesses ?? null;
+      return businesses ?? null;
+    } catch (error) {
+      ErrorLogger(error);
+      throw new BAD_REQUST_EXCEPTION(
+        "Unable to get all businesses, please try again",
+      );
+    }
   };
 
   getBusinessBySlug = async (slug: string): Promise<Business | null> => {
