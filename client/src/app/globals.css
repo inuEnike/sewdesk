@@ -18,6 +18,8 @@
   --muted: #f3f4f6;
   --muted-foreground: #64748b;
 
+  --danger: #DC2626;
+
   --light-text: #4b5563;
   --icon-color: #2563EB;
   --digit-color: #c7dbf2cb;
@@ -59,6 +61,8 @@
   --color-icon-color: var(--icon-color);
 
   --color-footer: var(--footer);
+
+  --color-danger: var(--danger);
 
   --color-digit-color: var(--digit-color);
 
