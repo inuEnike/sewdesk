@@ -20,12 +20,14 @@ app.use(
       client: redis,
       prefix: "sewdesk-session:",
     }),
-    rolling: true,
     name: "sewdesk.sid",
     cookie: {
       httpOnly: true,
-      maxAge: 1000 * 60 * 30,
+      maxAge: 1000 * 60 * 60 * 7,
+      sameSite: "lax",
+      secure: ENV.NODE_ENV === "production",
     },
+    rolling: true,
   }),
 );
 

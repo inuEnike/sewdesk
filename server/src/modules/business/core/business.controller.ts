@@ -38,7 +38,7 @@ export class BusinessController {
         message:
           businesses.length && businesses.length === 1
             ? `${businesses.length} business found `
-            : `${businesses.length} businesss found `,
+            : `${businesses.length} businesses found `,
         status: 200,
         data: businesses,
       });

@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f9fafb;
+  --foreground: #111827;
+
+  --card: #ffffff;
+  --card-foreground: #111827;
+
+  --ferra: #1e3a8a;
+  --ferra-foreground: #ffffff;
+
+  --footer: #111827;
+
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+
+  --muted: #f3f4f6;
+  --muted-foreground: #64748b;
+
+  --light-text: #4b5563;
+  --icon-color: #2563EB;
+  --digit-color: #c7dbf2cb;
+
+  --border: #e5e7eb;
+  --icon-background: #eff6ff;
+  --emrald-primary: #059669;
+
+  --footer-icon:  #374151;
+
+  --background-secondary: #f5f7f8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-ferra: var(--ferra);
+  --color-ferra-foreground: var(--ferra-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-footer-icon-background: var(--footer-icon);
+
+  --color-light-text: var(--light-text);
+
+  --color-border: var(--border);
+
+  --color-background-secondary: var(--background-secondary);
+
+  --color-icon-background: var(--icon-background);
+  --color-icon-color: var(--icon-color);
+
+  --color-footer: var(--footer);
+
+  --color-digit-color: var(--digit-color);
+
+  --font-sans: var(--font-inter);
+  --color-emerald-primary: var(--emrald-primary);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
