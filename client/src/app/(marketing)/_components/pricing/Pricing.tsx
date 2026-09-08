@@ -2,6 +2,7 @@ import Heading from "@/component/shared/Heading";
 import React from "react";
 import PricingCard from "./PricingCard";
 import { Plans } from "@/lib/utils/sewdeskPlans";
+import Price from "@/component/shared/Price";
 
 const Pricing = () => {
   return (
@@ -11,20 +12,7 @@ const Pricing = () => {
           eyebrow="Simple, Transparent Pricing"
           title="A plan for every size of workshop."
         />
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 xl:gap-7 py-5">
-          {Plans.map((plan) => (
-            <PricingCard
-              key={plan.id}
-              title={plan.name}
-              description={plan.description}
-              price={plan.price}
-              period={plan.period}
-              cta={plan.cta}
-              badge={plan.badge}
-              features={plan.features}
-            />
-          ))}
-        </section>
+        <Price />
       </div>
     </section>
   );

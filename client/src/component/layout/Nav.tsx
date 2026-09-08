@@ -19,7 +19,7 @@ const Nav = () => {
   return (
     <>
       <nav
-        className={`bg-background w-full lg:w-[85%] xl:w-[70%] py-7 flex items-center flex-col justify-between shadow-xs ${navOpen ? "rounded-b-xl" : "rounded-none"} px-7 my-3 m-auto sticky top-0`}
+        className={`bg-background w-full lg:w-[85%] xl:w-[70%] py-7 flex items-center flex-col justify-between shadow-xs ${navOpen ? "rounded-b-xl" : "rounded-full"} px-7 my-3 m-auto sticky top-0`}
       >
         <div className="flex items-center justify-between w-full">
           <Logo />
