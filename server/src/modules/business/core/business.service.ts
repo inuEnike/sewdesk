@@ -14,10 +14,10 @@ export class BusinessService implements Service {
     this.repository = repository;
   }
 
-  getLoggedInUserBusinesses = async (userId: string): Promise<Business[]> => {
-    // find business by user id
+  getLoggedInUserBusinesses = async (slug: string): Promise<Business[]> => {
+    // find business by user slug
     const businesses =
-      await this.repository.getBusinessesByBusinessOwnerId(userId);
+      await this.repository.getBusinessesByBusinessOwnerId(slug);
 
     // if there are no business, spit out an exception
     if (businesses.length === 0) {

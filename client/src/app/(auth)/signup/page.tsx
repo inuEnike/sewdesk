@@ -6,8 +6,8 @@ import AuthHero from "../_components/AuthHero";
 
 const Page = () => {
   return (
-    <section className="grid md:grid-cols-[1fr_1.2fr] w-full">
-      <div className="py-10 px-5 lg:p-20 w-full flex flex-col justify-between not-md:my-20">
+    <section className="grid md:grid-cols-[1.3fr_1fr] xl:grid-cols-[1fr_1.2fr] w-full">
+      <div className="py-10 px-5 lg:px-7 xl:p-20 w-full flex flex-col justify-between not-md:my-20">
         <div className="not-md:flex justify-center items-center">
           <Logo />
         </div>

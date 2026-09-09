@@ -7,12 +7,15 @@ import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import Heading from "./Heading";
 import { useRouter } from "next/navigation";
+import { useApp } from "@/context/AppContext";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const { login, loading, error } = useAuth();
+  const { businesses } = useApp();
+  console.log(businesses);
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +23,11 @@ const LoginForm = () => {
     console.log(result);
 
     if (result.success) {
-      router.push("/dashboard");
+      if (businesses?.length === 0) {
+        router.push("/add-business");
+        return;
+      }
+      router.push("/all-businesses");
     }
   };
   return (

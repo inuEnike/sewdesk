@@ -8,10 +8,12 @@ import { BsGrid3X2GapFill, BsList } from "react-icons/bs";
 import Image from "next/image";
 import { IoClose } from "react-icons/io5";
 import Logo from "../ui/Logo";
+import { useApp } from "@/context/AppContext";
 
 const Nav = () => {
   const pathName = usePathname();
   const [navOpen, setNavOpen] = useState<boolean>(false);
+  const { me } = useApp();
 
   function handleToggleNav() {
     setNavOpen((prev) => !prev);
@@ -40,10 +42,16 @@ const Nav = () => {
             })}
           </ul>
           <ul className="authActions gap-4 flex items-center not-md:hidden text-[15px]">
-            <Link href={"/login"} className="text-light-text">
-              Log In
-            </Link>
-            <Button children="Get Started" />
+            {me && me === null ? (
+              <>
+                <Link href={"/login"} className="text-light-text">
+                  Log In
+                </Link>
+                <Button children="Get Started" />
+              </>
+            ) : (
+              <Button children="Dashboard" />
+            )}
           </ul>
 
           <button className="md:hidden" onClick={handleToggleNav}>
@@ -74,10 +82,16 @@ const Nav = () => {
             </ul>
 
             <ul className="authActions gap-4 flex flex-col items-center pb-2 md:hidden text-[15px]">
-              <Link href={"/login"} className="text-light-text">
-                Log In
-              </Link>
-              <Button children="Get Started" />
+              {me && me === null ? (
+                <>
+                  <Link href={"/login"} className="text-light-text">
+                    Log In
+                  </Link>
+                  <Button children="Get Started" />
+                </>
+              ) : (
+                <Button children="Dashboard" />
+              )}
             </ul>
           </>
         )}

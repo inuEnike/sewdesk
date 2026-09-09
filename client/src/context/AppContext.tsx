@@ -1,29 +1,62 @@
 "use client";
-import { useAuth } from "@/hooks/authStore";
-import { AuthService } from "@/services/auth/auth";
+import { AuthService } from "@/services/auth/auth.service";
 import { User } from "@/services/auth/validation";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { BusinessService } from "@/services/business/business.service";
+import { Business } from "@/services/business/validation";
+import { useParams } from "next/navigation";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface AppContextProp {
   me: User | null;
+  businesses: Business[] | null;
+  businessBySlug: Business | null;
 }
 
 export const AppContext = createContext<AppContextProp | undefined>(undefined);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [me, setMe] = useState<User | null>(null);
+  const [businesses, setBusinesses] = useState<Business[] | null>(null);
+  const [businessBySlug, setBusinessBySlug] = useState<Business | null>(null);
+  const { slug } = useParams();
   useEffect(() => {
-    const getMe = async () => {
+    const getAppData = async () => {
       try {
-        const { data } = await AuthService.me();
-        setMe(data);
+        const [meResponse, businessResponse, businessBySlugResponse] =
+          await Promise.all([
+            AuthService.me(),
+            BusinessService.getLoggedInUserBusinesses(),
+            BusinessService.getBusinessBySlug(slug),
+          ]);
+
+        setMe(meResponse?.data);
+        setBusinesses(businessResponse?.data);
+        setBusinessBySlug(businessBySlugResponse.data);
       } catch (error) {
-        console.error("ME ERROR:", error);
+        console.error("APP DATA ERROR:", error);
       }
     };
 
-    getMe();
+    getAppData();
   }, []);
 
-  return <AppContext value={{ me }}>{children}</AppContext>;
+  return (
+    <AppContext value={{ me, businesses, businessBySlug }}>
+      {children}
+    </AppContext>
+  );
+};
+
+export const useApp = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error("useApp must be used inside AppContextProvider");
+  }
+  return context;
 };
