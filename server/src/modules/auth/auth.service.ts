@@ -24,6 +24,10 @@ export class AuthService implements Service {
   constructor(private readonly repository: Repository) {}
 
   signup = async (data: SignupDTO): Promise<{ message: string }> => {
+    if (data.repeat_password !== data.hashed_password) {
+      throw new Error("Passwords don't match");
+    }
+
     // check for temp email
 
     const exixtingUser: User | null = await this.repository.findUserByEmail(
@@ -100,11 +104,19 @@ export class AuthService implements Service {
     // check if user exists
     const User = await this.repository.findUserByEmail(data.email);
 
+    if (!User) {
+      throw new NOT_FOUND_EXCEPTION(
+        "Invalid credentials provided, please try again",
+      );
+    }
+
+    console.log(User);
+
     // check if user is verified
     const verifyUser = User?.is_verified;
 
     if (!verifyUser) {
-      throw new CONFLICT_EXCEPTION("Verify your account before signin");
+      throw new CONFLICT_EXCEPTION("Please verify your account");
     }
 
     //compare the passwords
