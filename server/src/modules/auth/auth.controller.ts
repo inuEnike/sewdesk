@@ -55,9 +55,7 @@ export class AuthController {
     try {
       const result = SigninSchema.safeParse(req.body);
       if (!result.success) {
-        throw new VALIDATION_EXCEPTION(
-          result?.error?.issues[0]?.path + " is required",
-        );
+        throw new VALIDATION_EXCEPTION(result?.error?.issues[0]?.message);
       }
       const user = await this.service.signin(result.data);
 

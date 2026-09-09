@@ -1,4 +1,4 @@
-import { AuthService } from "@/services/auth/auth";
+import { AuthService } from "@/services/auth/auth.service";
 import { loginDTO, signupDTO } from "@/services/auth/validation";
 import { create } from "zustand";
 

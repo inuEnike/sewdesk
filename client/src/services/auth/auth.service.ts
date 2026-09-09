@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   static async signup(data: signupDTO) {
-    const request = await api.post("/auth/signup", data);
+    const request = await api.post("/auth/signup  ", data);
     if (request.status !== 200) {
       console.log(request?.data);
     }
