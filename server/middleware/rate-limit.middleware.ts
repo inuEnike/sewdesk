@@ -3,8 +3,8 @@ import { RedisStore } from "rate-limit-redis";
 import { redis } from "../config/redis";
 
 export const SignupRateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 5,
+  windowMs: 2 * 60 * 1000,
+  limit: 10,
 
   standardHeaders: "draft-7",
   legacyHeaders: false,
@@ -20,8 +20,8 @@ export const SignupRateLimiter = rateLimit({
 });
 
 export const SigninRateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 10,
+  windowMs: 2 * 60 * 1000,
+  limit: 20,
 
   standardHeaders: "draft-7",
   legacyHeaders: false,

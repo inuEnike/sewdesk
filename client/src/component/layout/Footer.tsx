@@ -4,9 +4,9 @@ import { FaFacebookF, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { LuLinkedin } from "react-icons/lu";
 import { footerItems } from "@/lib/utils/footerItems";
 import Link from "next/link";
+import CopyRightNotice from "../shared/CopyRightNotice";
 
 const Footer = () => {
-  const year = new Date().getFullYear();
   return (
     <footer className="bg-footer">
       <div className="h-auto py-20 not-lg:px-5 w-full lg:w-[85%] xl:w-[70%] m-auto text-background grid md:grid-cols-2 lg:grid-cols-4 gap-10 items-centser justify-between">
@@ -78,9 +78,7 @@ const Footer = () => {
       <div className="text-light-text h-auto py-10 not-lg:px-5 w-full lg:w-[85%] xl:w-[70%] m-auto">
         <hr className="" />
         <div className="py-3 flex lg:items-center not-lg:flex-col justify-between">
-          <p className="text-xs">
-            © <span>{year}</span> SewDesk Technologies. All rights reserved.
-          </p>
+          <CopyRightNotice />
 
           <ul className="flex lg:items-center gap-4 pt-2">
             {footerItems.legal.map((item, key) => (

@@ -16,9 +16,7 @@ export class AuthController {
       const result = SignupSchema.safeParse(req.body);
 
       if (!result.success) {
-        throw new VALIDATION_EXCEPTION(
-          result?.error?.issues[0]?.path + " is required",
-        );
+        throw new VALIDATION_EXCEPTION(result?.error?.issues[0]?.message);
       }
 
       const user = await this.service.signup(result.data);
@@ -37,9 +35,7 @@ export class AuthController {
     try {
       const result = verifySchema.safeParse(req.body);
       if (!result.success) {
-        throw new VALIDATION_EXCEPTION(
-          result?.error?.issues[0]?.path + " is required",
-        );
+        throw new VALIDATION_EXCEPTION(result?.error?.issues[0]?.message);
       }
 
       const verify = await this.service.verifyEmail(result.data);
@@ -85,10 +81,7 @@ export class AuthController {
         return next(new BAD_REQUST_EXCEPTION(err.message));
       }
 
-    res.clearCookie("sewdesk.sid");
-
-     
-
+      res.clearCookie("sewdesk.sid");
 
       return res.status(200).json({
         success: true,
