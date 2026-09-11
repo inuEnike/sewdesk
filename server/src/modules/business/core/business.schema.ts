@@ -57,7 +57,7 @@ export const BusinessSchema = z.object({
       },
     })
     .min(3),
-  status: z.enum(BUSINESS_STATUS),
+  status: z.enum(BUSINESS_STATUS).optional(),
   description: z.string().nullable(),
 });
 

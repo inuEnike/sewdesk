@@ -13,7 +13,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const { login, loading, error } = useAuth();
+  const { login, loading, error, clearError } = useAuth();
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,7 +61,13 @@ const LoginForm = () => {
           </Link>
         </p>
       </div>
-      {error && <ErrorState title="Couldn't sign you in" message={error} />}
+      {error && (
+        <ErrorState
+          title="Couldn't sign you in"
+          message={error}
+          onClose={clearError}
+        />
+      )}
     </form>
   );
 };

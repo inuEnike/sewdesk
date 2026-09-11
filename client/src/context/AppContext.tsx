@@ -32,7 +32,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     };
 
     getAppData();
-  });
+  }, [me]);
 
   return <AppContext value={{ me }}>{children}</AppContext>;
 };

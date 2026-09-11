@@ -16,7 +16,7 @@ const AuthHero = ({ imageURL, title, body, business }: AuthHero) => {
         <div className="bg-background rounded-md shadow px-5 flex flex-col gap-3 py-4">
           <h3 className="text-xl font-bold">{title}</h3>
           <p className="text-xs font-light text-light-text leading-5">{body}</p>
-          <p className="text-primary font-semibold text-xs">— {business}</p>
+          <p className="text-primary font-semibold text-xs">—{business}</p>
         </div>
       </div>
     </div>

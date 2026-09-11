@@ -46,7 +46,7 @@ export const PlanComparisonData = [
   },
   {
     feature: "Custom Booking URL",
-    sewdesk: false,
+    sewdesk: true,
     sewdeskPro: true,
   },
   {

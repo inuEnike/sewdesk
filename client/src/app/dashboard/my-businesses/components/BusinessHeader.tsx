@@ -1,4 +1,5 @@
 import Button from "@/component/ui/Button";
+import Link from "next/link";
 import { FiPlus } from "react-icons/fi";
 
 const BusinessHeader = () => {
@@ -18,9 +19,9 @@ const BusinessHeader = () => {
         </p>
       </div>
 
-      <div className="flex items-center gap-3">
-        <Button children="Create Business" />
-      </div>
+      <Link href={"/dashboard/create-business"} className="flex items-center gap-3">
+        <Button children="Create a Business" />
+      </Link>
     </div>
   );
 };
