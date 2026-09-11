@@ -9,12 +9,13 @@ import Image from "next/image";
 import { IoClose } from "react-icons/io5";
 import Logo from "../ui/Logo";
 import { useApp } from "@/context/AppContext";
+import { useAuth } from "@/hooks/authStore";
 
 const Nav = () => {
   const pathName = usePathname();
   const [navOpen, setNavOpen] = useState<boolean>(false);
   const { me } = useApp();
-
+  const logout = useAuth((state) => state.logout);
   function handleToggleNav() {
     setNavOpen((prev) => !prev);
   }

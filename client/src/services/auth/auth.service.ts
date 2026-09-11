@@ -20,6 +20,15 @@ export class AuthService {
     return request.data;
   }
 
+  static async logout() {
+    const request = await api.post("/auth/signup");
+    if (request.status !== 200) {
+      console.log(request?.data);
+    }
+
+    return request.data;
+  }
+
   static async signup(data: signupDTO) {
     const request = await api.post("/auth/signup  ", data);
     if (request.status !== 200) {

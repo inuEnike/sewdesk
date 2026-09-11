@@ -15,6 +15,11 @@ type AuthState = {
     success: boolean;
     error?: string;
   }>;
+
+  logout: () => Promise<{
+    success: boolean;
+    error?: string;
+  }>;
 };
 
 export const useAuth = create<AuthState>((set) => ({
@@ -24,7 +29,7 @@ export const useAuth = create<AuthState>((set) => ({
   clearError: () => {
     set({ error: null, loading: false });
   },
-  
+
   login: async (credentails: loginDTO) => {
     set({ loading: true, error: null });
 
@@ -48,6 +53,29 @@ export const useAuth = create<AuthState>((set) => ({
         loading: false,
       });
 
+      return {
+        success: false,
+        error: message,
+      };
+    }
+  },
+  logout: async () => {
+    set({ user: null, error: null });
+    try {
+      const response = await AuthService.logout();
+      if (!response) {
+        throw new Error("Login failed");
+      }
+      return {
+        success: true,
+      };
+    } catch (error: any) {
+      const message =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        "An error occurred";
+
+      set({ loading: false, error: message });
       return {
         success: false,
         error: message,
