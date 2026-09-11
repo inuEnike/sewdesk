@@ -6,6 +6,7 @@ export class BusinessService {
     const request = await api.get("/business/me");
 
     if (request.status != 200) {
+      console.log(request)
       throw new Error(request?.data?.error);
     }
     return request.data;
