@@ -42,7 +42,7 @@ const Nav = () => {
             })}
           </ul>
           <ul className="authActions gap-4 flex items-center not-md:hidden text-[15px]">
-            {me && me === null ? (
+            {me === null ? (
               <>
                 <Link href={"/login"} className="text-light-text">
                   Log In
