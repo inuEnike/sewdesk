@@ -5,6 +5,7 @@ import FeaturePreviewCard from "./components/FeaturePreviewCard";
 import { FeatureData } from "@/lib/utils/featureDaata";
 import PricingCard from "../_components/pricing/PricingCard";
 import { Plans } from "@/lib/utils/sewdeskPlans";
+import CallToAction from "./components/CallToAction";
 
 const Features = () => {
   return (
@@ -36,6 +37,7 @@ const Features = () => {
             </div>
           ))}
         </div>
+        <CallToAction />
       </section>
     </section>
   );

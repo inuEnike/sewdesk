@@ -18,9 +18,11 @@ const SignupForm = () => {
   });
   const router = useRouter();
 
-  const { signup, loading, error } = useAuth();
+  const { signup, loading, error, clearError } = useAuth();
 
-  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: ChangeEvent<HTMLFormElement | HTMLTextAreaElement>,
+  ) => {
     e.preventDefault();
     const result = await signup(form);
 
@@ -36,7 +38,9 @@ const SignupForm = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement, Element>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
 
     setForm((prev) => ({
@@ -116,7 +120,13 @@ const SignupForm = () => {
           </Link>
         </p>
       </div>
-      {error && <ErrorState title="Couldn't sign you in" message={error} />}
+      {error && (
+        <ErrorState
+          title="Couldn't sign you in"
+          message={error}
+          onClose={clearError}
+        />
+      )}
     </form>
   );
 };

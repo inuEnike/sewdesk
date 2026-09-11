@@ -24,6 +24,7 @@ export const useAuth = create<AuthState>((set) => ({
   clearError: () => {
     set({ error: null, loading: false });
   },
+  
   login: async (credentails: loginDTO) => {
     set({ loading: true, error: null });
 

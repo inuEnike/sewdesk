@@ -39,6 +39,7 @@ export class BusinessRepository implements Repository {
           ON b.business_owner_id = u.id
 
         WHERE b.business_owner_id = ${id}
+        ORDER BY b.created_at DESC
       `;
 
       return businesses;
@@ -213,7 +214,6 @@ export class BusinessRepository implements Repository {
           business_email,
           business_owner_id,
           slug,
-          status,
           description
         )
         VALUES (
@@ -224,7 +224,6 @@ export class BusinessRepository implements Repository {
           ${data.business_email},
           ${ownerId},
           ${data.slug},
-          ${data.status},
           ${data.description}
         )
         RETURNING *

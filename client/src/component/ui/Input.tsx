@@ -7,12 +7,15 @@ import { PiEyeClosedLight } from "react-icons/pi";
 type InputProps = {
   htmlFor: string;
   label: string;
-  inputType?: string;
+  inputType?: React.HTMLInputTypeAttribute;
   placeholder: string;
   isLogin?: boolean;
   name?: string;
+  isTextArea?: boolean;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 };
 
 const Input = ({
@@ -21,6 +24,7 @@ const Input = ({
   inputType = "text",
   placeholder,
   isLogin,
+  isTextArea = false,
   name,
   onChange,
   value,
@@ -45,28 +49,44 @@ const Input = ({
         )}
       </div>
 
-      <div className="bg-icon-background border-border border flex w-full my-2 items-center gap-2">
-        <input
-          id={htmlFor}
-          type={inputType === "password" && password ? "text" : inputType}
-          className="w-full py-3 px-2 outline-0 text-sm text-light-text bg-transparent"
-          onChange={onChange}
-          name={name}
-          required
-          value={value}
-          placeholder={placeholder}
-        />
+      {isTextArea ? (
+        <div className="bg-icon-background border-border border flex w-full my-2 items-center gap-2">
+          <textarea
+            name={name || ""}
+            id={htmlFor}
+            required
+            value={value}
+            cols={70}
+            rows={6}
+            placeholder={placeholder}
+            onChange={onChange}
+            className="w-full py-3 px-2 outline-0 text-sm text-light-text bg-transparent"
+          />
+        </div>
+      ) : (
+        <div className="bg-icon-background border-border border flex w-full my-2 items-center gap-2">
+          <input
+            id={htmlFor}
+            type={inputType === "password" && password ? "text" : inputType}
+            className="w-full py-3 px-2 outline-0 text-sm text-light-text bg-transparent"
+            onChange={onChange}
+            name={name}
+            required
+            value={value}
+            placeholder={placeholder}
+          />
 
-        {inputType === "password" && (
-          <button
-            type="button"
-            onClick={handleTogglePassword}
-            className="mr-2 cursor-pointer"
-          >
-            {password ? <LuEye /> : <PiEyeClosedLight />}
-          </button>
-        )}
-      </div>
+          {inputType === "password" && (
+            <button
+              type="button"
+              onClick={handleTogglePassword}
+              className="mr-2 cursor-pointer"
+            >
+              {password ? <LuEye /> : <PiEyeClosedLight />}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -47,10 +47,14 @@ const Nav = () => {
                 <Link href={"/login"} className="text-light-text">
                   Log In
                 </Link>
-                <Button children="Get Started" />
+                <Link href={"/signup"}>
+                  <Button children="Get Started" />
+                </Link>
               </>
             ) : (
-              <Button children="Dashboard" />
+              <Link href={"/dashboard/my-businesses"}>
+                <Button children="Dashboard" />
+              </Link>
             )}
           </ul>
 
@@ -90,7 +94,9 @@ const Nav = () => {
                   <Button children="Get Started" />
                 </>
               ) : (
-                <Button children="Dashboard" />
+                <Link href={"/dashboard/my-businesses"}>
+                  <Button children="Dashboard" />
+                </Link>
               )}
             </ul>
           </>
