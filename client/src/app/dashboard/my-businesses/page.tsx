@@ -3,24 +3,36 @@
 import React, { useEffect, useState } from "react";
 
 import EmptyState from "@/component/shared/EmptyState";
-import SearchInput from "@/component/shared/SearchInput";
-
-import { useApp } from "@/context/AppContext";
 
 import BusinessHeader from "./components/BusinessHeader";
 import { BusinessCard } from "./components/BusinessCard";
-
-import { useSearch } from "@/hooks/useSearch";
 import SearchToolBar from "./components/SearchToolBar";
 
-export default function YourBusinessesPage(): React.ReactElement {
-  const { businesses } = useApp();
+import { useSearch } from "@/hooks/useSearch";
+import { BusinessService } from "@/services/business/business.service";
+import { Business } from "@/services/business/validation";
 
+export default function YourBusinessesPage(): React.ReactElement {
+  const [businesses, setBusinesses] = useState<Business[]>([]);
   const [currentBusinessId, setCurrentBusinessId] = useState<string | null>(
     null,
   );
 
-  const businessList = businesses ?? [];
+  useEffect(() => {
+    const getBusinesses = async () => {
+      try {
+        const res = await BusinessService.getLoggedInUserBusinesses();
+
+        setBusinesses(res.data ?? []);
+      } catch (error) {
+        console.error("GET BUSINESSES ERROR:", error);
+      }
+    };
+
+    getBusinesses();
+  }, []);
+
+  const businessList = businesses;
 
   const {
     searchTerm,
@@ -51,7 +63,6 @@ export default function YourBusinessesPage(): React.ReactElement {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
         <BusinessHeader />
 
-        {/* Search Toolbar */}
         {businessList.length > 0 && (
           <SearchToolBar
             resultCount={resultCount}
@@ -60,7 +71,7 @@ export default function YourBusinessesPage(): React.ReactElement {
             totalCount={totalCount}
           />
         )}
-        {/* Business List or Empty State */}
+
         {filteredBusinesses.length > 0 ? (
           <div className="grid grid-cols-1 gap-5">
             {filteredBusinesses.map((biz) => (

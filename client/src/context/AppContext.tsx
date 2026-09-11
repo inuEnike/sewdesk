@@ -14,43 +14,27 @@ import {
 
 interface AppContextProp {
   me: User | null;
-  businesses: Business[] | null;
-  businessBySlug: Business | null;
 }
 
 export const AppContext = createContext<AppContextProp | undefined>(undefined);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [me, setMe] = useState<User | null>(null);
-  const [businesses, setBusinesses] = useState<Business[] | null>(null);
-  const [businessBySlug, setBusinessBySlug] = useState<Business | null>(null);
-  const { slug } = useParams();
   useEffect(() => {
     const getAppData = async () => {
       try {
-        const [meResponse, businessResponse, businessBySlugResponse] =
-          await Promise.all([
-            AuthService.me(),
-            BusinessService.getLoggedInUserBusinesses(),
-            BusinessService.getBusinessBySlug(slug),
-          ]);
+        const getMe = await AuthService.me();
 
-        setMe(meResponse?.data);
-        setBusinesses(businessResponse?.data);
-        setBusinessBySlug(businessBySlugResponse.data);
+        setMe(getMe?.data);
       } catch (error) {
         console.error("APP DATA ERROR:", error);
       }
     };
 
     getAppData();
-  }, []);
+  });
 
-  return (
-    <AppContext value={{ me, businesses, businessBySlug }}>
-      {children}
-    </AppContext>
-  );
+  return <AppContext value={{ me }}>{children}</AppContext>;
 };
 
 export const useApp = () => {

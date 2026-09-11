@@ -21,7 +21,7 @@ const EmptyState = ({
         <h3 className="text-lg font-bold text-foreground">
           No matching businesses found
         </h3>
-        <p className="text-sm text-light-text mt-1">
+        <p className="text-xs text-light-text mt-1">
           We couldn't find any business matching your search filter.
         </p>
         {clearSearch && (
@@ -46,7 +46,7 @@ const EmptyState = ({
         No businesses registered yet
       </h2>
 
-      <p className="text-light-text text-sm mt-2 max-w-md mx-auto leading-relaxed">
+      <p className="text-light-text text-xs mt-2 max-w-md mx-auto leading-relaxed">
         Get started by adding your first workshop or atelier. You'll be able to
         manage orders, customer measurements, and fabrics right away.
       </p>

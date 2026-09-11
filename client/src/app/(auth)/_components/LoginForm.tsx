@@ -14,8 +14,6 @@ const LoginForm = () => {
   const router = useRouter();
 
   const { login, loading, error } = useAuth();
-  const { businesses } = useApp();
-  console.log(businesses);
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,11 +21,7 @@ const LoginForm = () => {
     console.log(result);
 
     if (result.success) {
-      if (businesses?.length === 0) {
-        router.push("/add-business");
-        return;
-      }
-      router.push("/all-businesses");
+      router.push("/dashboard/my-businesses");
     }
   };
   return (
