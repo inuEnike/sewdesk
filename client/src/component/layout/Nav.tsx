@@ -1,7 +1,7 @@
 "use client";
 import { navItems } from "@/lib/utils/navItems";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Button from "../ui/Button";
 import { BsGrid3X2GapFill, BsList } from "react-icons/bs";
@@ -13,9 +13,20 @@ import { useAuth } from "@/hooks/authStore";
 
 const Nav = () => {
   const pathName = usePathname();
+  const router = useRouter();
   const [navOpen, setNavOpen] = useState<boolean>(false);
-  const { me } = useApp();
+  const { me, setMe } = useApp();
+
   const logout = useAuth((state) => state.logout);
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setMe(null);
+      router.push("/");
+    } catch (error) {
+      alert(error);
+    }
+  };
   function handleToggleNav() {
     setNavOpen((prev) => !prev);
   }
@@ -53,9 +64,17 @@ const Nav = () => {
                 </Link>
               </>
             ) : (
-              <Link href={"/dashboard/my-businesses"}>
-                <Button children="Dashboard" />
-              </Link>
+              <>
+                <div
+                  className="cursor-pointer text-light-text"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+                <Link href={"/dashboard/my-businesses"}>
+                  <Button children="Dashboard" />
+                </Link>
+              </>
             )}
           </ul>
 

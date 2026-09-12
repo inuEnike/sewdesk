@@ -10,7 +10,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
 
 const VerifyForm = () => {
-  const { login, loading, error, clearError } = useAuth();
+  const { loading, error, clearError } = useAuth();
   const router = useRouter();
 
   return (
@@ -45,7 +45,13 @@ const VerifyForm = () => {
         )}
       </div>
 
-      {error && <ErrorState title="Couldn't sign you in" message={error} onClose={clearError}/>}
+      {error && (
+        <ErrorState
+          title="Couldn't sign you in"
+          message={error}
+          onClose={clearError}
+        />
+      )}
     </form>
   );
 };

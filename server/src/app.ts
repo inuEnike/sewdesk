@@ -7,6 +7,7 @@ import { apiResponse } from "../utils/apiResponse";
 import { ErrorMiddleware } from "../middleware/error.middleware";
 import authRouter from "./modules/auth/auth.route";
 import businessRouter from "./modules/business/core/business.route";
+import planRouter from "./modules/business/plans/plans.route";
 import cors from "cors";
 
 export const app: Express = express();
@@ -42,6 +43,7 @@ const prefix = "/api/v1";
 
 app.use(`${prefix}/auth`, authRouter);
 app.use(`${prefix}/business`, businessRouter);
+app.use(`${prefix}/plans`, planRouter);
 
 app.use((req: Request, res: Response) => {
   apiResponse({

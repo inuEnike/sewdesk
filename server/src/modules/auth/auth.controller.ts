@@ -81,9 +81,10 @@ export class AuthController {
 
       res.clearCookie("sewdesk.sid");
 
-      return res.status(200).json({
-        success: true,
-        message: "Logged out successfully",
+      apiResponse({
+        req,
+        res,
+        message: "Logged out Success",
         status: 200,
       });
     });

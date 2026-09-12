@@ -6,13 +6,16 @@ import { Business } from "@/services/business/validation";
 import { useParams } from "next/navigation";
 import {
   createContext,
+  Dispatch,
   ReactNode,
+  SetStateAction,
   useContext,
   useEffect,
   useState,
 } from "react";
 
 interface AppContextProp {
+  setMe: Dispatch<SetStateAction<User | null>>;
   me: User | null;
 }
 
@@ -34,7 +37,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     getAppData();
   }, [me]);
 
-  return <AppContext value={{ me }}>{children}</AppContext>;
+  return <AppContext value={{ me, setMe }}>{children}</AppContext>;
 };
 
 export const useApp = () => {
