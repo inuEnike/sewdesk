@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   static async logout() {
-    const request = await api.post("/auth/signup");
+    const request = await api.post("/auth/signout");
     if (request.status !== 200) {
       console.log(request?.data);
     }
