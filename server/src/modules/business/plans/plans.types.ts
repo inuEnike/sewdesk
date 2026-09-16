@@ -1,12 +1,26 @@
-import type postgres from "postgres";
 import type { PlansDTO, UpdatePlanDTO } from "./plans.schema";
 
 export interface Plan {
   id: string;
+
   name: string;
+
   description: string;
+
   price: string;
+
+  period: string;
+
+  cta: string;
+
+  highlight: boolean;
+
+  badge: string | null;
+
+  features: string[];
+
   created_at: string;
+
   updated_at: string;
 }
 
@@ -17,7 +31,9 @@ export interface Repository {
 
   createPlan: (data: PlansDTO) => Promise<Plan | null>;
 
-  updatePlanById: (id: string, data: PlansDTO) => Promise<Plan | null>;
+  updatePlanById: (id: string, data: UpdatePlanDTO) => Promise<Plan | null>;
+
+  getPlanByPlanName: (name: string) => Promise<Plan | null>;
 
   deletePlanById: (id: string) => Promise<Plan | null>;
 }

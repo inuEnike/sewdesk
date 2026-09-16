@@ -1,4 +1,7 @@
-import { NOT_FOUND_EXCEPTION } from "../../../../middleware/error.middleware";
+import {
+  CONFLICT_EXCEPTION,
+  NOT_FOUND_EXCEPTION,
+} from "../../../../middleware/error.middleware";
 import {
   planSchema,
   updatePlanSchema,
@@ -25,9 +28,17 @@ export class PlanService implements Service {
   };
 
   createPlan = async (data: PlansDTO): Promise<Plan | null> => {
-    const validatedData = planSchema.parse(data);
+    // const validatedData = planSchema.parse(data);
 
-    return await this.planRepository.createPlan(validatedData);
+    const checkIfExists = await this.planRepository.getPlanByPlanName(
+      data.name,
+    );
+
+    if (checkIfExists) {
+      throw new CONFLICT_EXCEPTION("Plan with that name already exists");
+    }
+
+    return await this.planRepository.createPlan(data);
   };
 
   updatePlanById = async (

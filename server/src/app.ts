@@ -8,11 +8,21 @@ import { ErrorMiddleware } from "../middleware/error.middleware";
 import authRouter from "./modules/auth/auth.route";
 import businessRouter from "./modules/business/core/business.route";
 import planRouter from "./modules/business/plans/plans.route";
+import subscriptionRouter from "./modules/business/subscription/subscription.route";
+import paymentRouter from "./modules/business/payments/payments.route";
+
 import cors from "cors";
 
 export const app: Express = express();
 
-app.use(express.json());
+app.use(
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf;
+    },
+  }),
+);
+
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -44,6 +54,8 @@ const prefix = "/api/v1";
 app.use(`${prefix}/auth`, authRouter);
 app.use(`${prefix}/business`, businessRouter);
 app.use(`${prefix}/plans`, planRouter);
+app.use(`${prefix}/subscription`, subscriptionRouter);
+app.use(`${prefix}/payment`, paymentRouter);
 
 app.use((req: Request, res: Response) => {
   apiResponse({
