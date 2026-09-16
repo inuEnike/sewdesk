@@ -17,7 +17,7 @@ export const transport =
     : null;
 
 export const resend =
-  ENV.NODE_ENV === "production" ? new Resend(ENV.MAILER_PASSWORD) : null;
+  ENV.NODE_ENV === "production" ? new Resend(ENV.RESEND_MAILER_PASSWORD) : null;
 
 export const verifyNodemailer = async () => {
   if (!transport) return;
