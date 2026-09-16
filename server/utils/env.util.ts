@@ -14,6 +14,7 @@ type ENVTYPES = {
   CLIENT_URL: string;
   PAYSTACK_CLIENT_URL: string;
   PAYSTACK_SECRET_KEY: string;
+  RESEND_MAILER_PASSWORD: string;
   REDIS_URL: string;
 };
 
@@ -38,4 +39,5 @@ export const ENV = {
   PAYSTACK_CLIENT_URL: envValue("PAYSTACK_CLIENT_URL"),
   PAYSTACK_SECRET_KEY: envValue("PAYSTACK_SECRET_KEY"),
   REDIS_URL: envValue("REDIS_URL"),
+  RESEND_MAILER_PASSWORD: envValue("RESEND_MAILER_PASSWORD"),
 } satisfies Readonly<ENVTYPES>;
