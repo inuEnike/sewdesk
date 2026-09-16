@@ -1,8 +1,5 @@
 import Heading from "@/component/shared/Heading";
-import React from "react";
-import PricingCard from "./PricingCard";
-import { Plans } from "@/lib/utils/sewdeskPlans";
-import Price from "@/component/shared/Price";
+import MarketingPrice from "@/component/shared/MArketingPrice";
 
 const Pricing = () => {
   return (
@@ -12,7 +9,7 @@ const Pricing = () => {
           eyebrow="Simple, Transparent Pricing"
           title="A plan for every size of workshop."
         />
-        <Price />
+        <MarketingPrice />
       </div>
     </section>
   );
