@@ -1,6 +1,10 @@
 import { PostgresDb, sql, type IDatabase } from "../config/db.ts";
 import { logger } from "../config/logger.ts";
-import { transport, verifyNodemailer } from "../config/nodemailer.ts";
+import {
+  transport,
+  verifyNodemailer,
+  verifyResend,
+} from "../config/emailCLient.ts";
 import { connectRedis, disconnectRedis, redis } from "../config/redis.ts";
 
 import { ENV } from "../utils/env.util.ts";
@@ -14,9 +18,10 @@ await connectRedis();
 
 const { app } = await import("./app.ts");
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, async () => {
   logger.info(`SewDesk server listening on port ${PORT} 🔥`);
-  verifyNodemailer();
+  // await verifyNodemailer();
+  await verifyResend();
 });
 
 const stopProcesses = () => {

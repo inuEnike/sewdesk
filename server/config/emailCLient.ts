@@ -24,6 +24,21 @@ import nodemailer from "nodemailer";
 import { ENV } from "../utils/env.util";
 import { logger } from "./logger";
 import { ErrorLogger } from "./errorLog";
+import { Resend } from "resend";
+
+export const resend = new Resend(ENV.MAILER_PASSWORD);
+
+export const verifyResend = async () => {
+  try {
+    if (!ENV.MAILER_PASSWORD) {
+      throw new Error("RESEND_API_KEY is missing");
+    }
+
+    logger.info("Resend configured successfully 🚀");
+  } catch (error) {
+    ErrorLogger(error, "Failed to configure Resend");
+  }
+};
 
 export const transport = nodemailer.createTransport({
   host: "smtp.resend.com",
