@@ -1,34 +1,39 @@
-// import nodemailer from "nodemailer";
-// import { ENV } from "../utils/env.util";
-// import { logger } from "./logger";
-// import { ErrorLogger } from "./errorLog";
-
-// export const transport = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: ENV.MAILER_NAME, // yourname@gmail.com
-//     pass: ENV.MAILER_PASSWORD, // Gmail App Password
-//   },
-// });
-
-// export const verifyNodemailer = async () => {
-//   try {
-//     await transport.verify();
-//     logger.info("Nodemailer ready to receive email");
-//   } catch (error) {
-//     ErrorLogger(error, "Failed to connect to Nodemailer");
-//   }
-// };
-
 import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
 import { ENV } from "../utils/env.util";
 import { logger } from "./logger";
 import { ErrorLogger } from "./errorLog";
-import { Resend } from "resend";
 
-export const resend = new Resend(ENV.MAILER_PASSWORD);
+export const transport =
+  ENV.NODE_ENV !== "production"
+    ? nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: ENV.MAILER_NAME,
+          pass: ENV.MAILER_PASSWORD,
+        },
+      })
+    : null;
+
+export const resend =
+  ENV.NODE_ENV === "production" ? new Resend(ENV.MAILER_PASSWORD) : null;
+
+export const verifyNodemailer = async () => {
+  if (!transport) return;
+
+  try {
+    await transport.verify();
+
+    logger.info("Nodemailer ready to send email 📧");
+  } catch (error) {
+    ErrorLogger(error, "Failed to connect to Nodemailer");
+  }
+};
 
 export const verifyResend = async () => {
+  if (!resend) return;
+
   try {
     if (!ENV.MAILER_PASSWORD) {
       throw new Error("RESEND_API_KEY is missing");
@@ -37,26 +42,5 @@ export const verifyResend = async () => {
     logger.info("Resend configured successfully 🚀");
   } catch (error) {
     ErrorLogger(error, "Failed to configure Resend");
-  }
-};
-
-export const transport = nodemailer.createTransport({
-  host: "smtp.resend.com",
-  port: 587,
-  secure: false,
-
-  auth: {
-    user: "resend",
-    pass: ENV.MAILER_PASSWORD,
-  },
-});
-
-export const verifyNodemailer = async () => {
-  try {
-    await transport.verify();
-
-    logger.info("Nodemailer ready to send email");
-  } catch (error) {
-    ErrorLogger(error, "Failed to connect to Resend SMTP");
   }
 };

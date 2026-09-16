@@ -26,14 +26,19 @@ const SignupForm = () => {
     e.preventDefault();
     const result = await signup(form);
 
-    setForm({
-      full_name: "",
-      email: "",
-      phone_number: "",
-      hashed_password: "",
-      repeat_password: "",
-    });
+    if (result?.error) {
+      form.hashed_password = "";
+      form.repeat_password = "";
+    }
+
     if (result.success) {
+      setForm({
+        full_name: "",
+        email: "",
+        phone_number: "",
+        hashed_password: "",
+        repeat_password: "",
+      });
       router.push("/waiting-confirmation");
     }
   };
