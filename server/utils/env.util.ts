@@ -12,6 +12,8 @@ type ENVTYPES = {
   MAILER_PASSWORD: string;
   SENDER_EMAIL: string;
   CLIENT_URL: string;
+  PAYSTACK_CLIENT_URL: string;
+  PAYSTACK_SECRET_KEY: string;
 };
 
 const envValue = (value: string): string => {
@@ -32,4 +34,6 @@ export const ENV = {
   MAILER_PASSWORD: envValue("MAILER_PASSWORD"),
   SENDER_EMAIL: envValue("SENDER_EMAIL"),
   CLIENT_URL: envValue("CLIENT_URL"),
+  PAYSTACK_CLIENT_URL: envValue("PAYSTACK_CLIENT_URL"),
+  PAYSTACK_SECRET_KEY: envValue("PAYSTACK_SECRET_KEY"),
 } satisfies Readonly<ENVTYPES>;

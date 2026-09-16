@@ -22,8 +22,6 @@ export const up = (pgm) => {
             status TEXT NOT NULL DEFAULT 'pending'
                 CHECK (status IN ('pending', 'active', 'suspended', 'cancelled')),
             description TEXT,
-            plan TEXT NOT NULL 
-                CHECK (plan IN ('sewdesk', 'sewdesk_pro')),
             created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),  
             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
         )    

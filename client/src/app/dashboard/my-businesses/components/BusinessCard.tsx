@@ -26,14 +26,21 @@ export const BusinessCard = ({
   isCurrent = false,
   onSelect,
 }: BusinessCardProps): React.ReactElement => {
-  const { business_name, address, business_phone, status, slug, created_at } =
-    business;
+  const {
+    business_name,
+    address,
+    business_phone,
+    status,
+    slug,
+    created_at,
+    id,
+  } = business;
 
   const isPending = status?.toLowerCase() === BUSINESS_STATUS.PENDING;
 
   // Dynamic link destination
   const targetHref = isPending
-    ? `/checkout/${slug}` // Replace with your checkout/payment route
+    ? `/dashboard/checkout/${id}` 
     : `/dashboard/${slug}`;
 
   // Dynamic button label
@@ -116,7 +123,7 @@ export const BusinessCard = ({
 
                 <span
                   className={`self-start sm:self-auto shrink-0 text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full font-medium border capitalize ${getStatusBadge(
-                    status
+                    status,
                   )}`}
                 >
                   {status}

@@ -79,7 +79,7 @@ export class BusinessRepository implements Repository {
         INNER JOIN auth.users AS u
           ON b.business_owner_id = u.id
 
-        WHERE b.slug = ${id}
+        WHERE b.id = ${id}
           AND b.business_owner_id = ${userId}
       `;
 

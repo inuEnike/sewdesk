@@ -110,8 +110,6 @@ export class AuthService implements Service {
       );
     }
 
-    console.log(User);
-
     // check if user is verified
     const verifyUser = User?.is_verified;
 

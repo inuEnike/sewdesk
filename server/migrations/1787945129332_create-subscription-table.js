@@ -13,9 +13,9 @@ export const up = (pgm) => {
         CREATE TABLE IF NOT EXISTS business.subscription(
             id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-            business_id UUID REFERENCES business.businesses(id) NOT NULL ON DELETE CASCADE,
+            business_id UUID NOT NULL REFERENCES business.businesses(id)  ON DELETE CASCADE,
 
-            plan_id UUID REFERENCES business.plans(id) NOT NULL ON DELETE RESTRICT,
+            plan_id UUID NOT NULL REFERENCES business.plans(id) ON DELETE RESTRICT,
             
             status TEXT NOT NULL DEFAULT 'pending'     
                 CHECK (status IN ('pending', 'active', 'cancelled')),
@@ -24,7 +24,7 @@ export const up = (pgm) => {
             
             expires_at TIMESTAMPTZ,
             
-            created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),  s
+            created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), 
             
             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
         )

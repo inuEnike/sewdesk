@@ -1,11 +1,13 @@
 import Button from "@/component/ui/Button";
 import OutlineButton from "@/component/ui/OutlineButton";
+import Link from "next/link";
 import React from "react";
 import { IconType } from "react-icons";
 import { LuCircleCheck } from "react-icons/lu";
 import { PiShieldCheckFill } from "react-icons/pi";
 
 type PricingCardProps = {
+  id: string;
   title: string;
   description: string;
   price: number;
@@ -13,9 +15,11 @@ type PricingCardProps = {
   cta: string;
   badge?: string;
   features: string[];
+  onSelect: (id: string) => void;
 };
 
 const PricingCard = ({
+  id,
   title,
   description,
   price,
@@ -23,6 +27,7 @@ const PricingCard = ({
   cta,
   badge,
   features,
+  onSelect,
 }: PricingCardProps) => {
   return (
     <div className="bg-white border border-border rounded-xl p-4 self-start">
@@ -51,11 +56,17 @@ const PricingCard = ({
             </li>
           ))}
         </ul>
-        {title === "Freemium" || title === "SewDesk Pro" ? (
-          <OutlineButton children={cta} variant="full" />
-        ) : (
-          <Button children={cta} variant="full" />
-        )}
+        <div
+          onClick={() => {
+            onSelect(id);
+          }}
+        >
+          {title === "Freemium" || title === "SewDesk Pro" ? (
+            <OutlineButton children={cta} variant="full" />
+          ) : (
+            <Button children={cta} variant="full" />
+          )}
+        </div>
       </div>
     </div>
   );
