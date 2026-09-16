@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { AppContextProvider } from "@/context/AppContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const queryClient = new QueryClient();
   return (
     <html
       lang="en"
@@ -23,8 +25,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-qb-installed="true"
     >
       <body>
-        <Analytics />
-        <AppContextProvider>{children}</AppContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <Analytics />
+          <AppContextProvider>{children}</AppContextProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
