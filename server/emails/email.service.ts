@@ -10,18 +10,18 @@ export class EmailService {
 
     const text = `Welcome to SewDesk!
 
-Thanks for creating your SewDesk account.
+                  Thanks for creating your SewDesk account.
 
-Please verify your email address by clicking the link below:
+                  Please verify your email address by clicking the link below:
 
-${verificationLink}
+                  ${verificationLink}
 
-This verification link will expire in 5 minutes.
+                  This verification link will expire in 5 minutes.
 
-If you didn't create a SewDesk account, you can safely ignore this email.
+                  If you didn't create a SewDesk account, you can safely ignore this email.
 
-© SewDesk. All rights reserved.
-`;
+                  © SewDesk. All rights reserved.
+    `;
 
     const html = verificationEmail(verificationLink);
 
