@@ -14,6 +14,7 @@ type ENVTYPES = {
   CLIENT_URL: string;
   PAYSTACK_CLIENT_URL: string;
   PAYSTACK_SECRET_KEY: string;
+  REDIS_URL: string;
 };
 
 const envValue = (value: string): string => {
@@ -36,4 +37,5 @@ export const ENV = {
   CLIENT_URL: envValue("CLIENT_URL"),
   PAYSTACK_CLIENT_URL: envValue("PAYSTACK_CLIENT_URL"),
   PAYSTACK_SECRET_KEY: envValue("PAYSTACK_SECRET_KEY"),
+  REDIS_URL: envValue("REDIS_URL"),
 } satisfies Readonly<ENVTYPES>;
