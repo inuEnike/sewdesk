@@ -27,8 +27,8 @@ import { ErrorLogger } from "./errorLog";
 
 export const transport = nodemailer.createTransport({
   host: "smtp.resend.com",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
 
   auth: {
     user: "resend",
