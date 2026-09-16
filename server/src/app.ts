@@ -25,7 +25,7 @@ app.use(
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://sewdesk.onrender.com"],
+    origin: ["http://localhost:3000", "https://sewdesk.vercel.app"],
     credentials: true,
   }),
 );
