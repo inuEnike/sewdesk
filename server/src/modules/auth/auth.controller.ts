@@ -7,7 +7,6 @@ import {
 import { apiResponse } from "../../../utils/apiResponse";
 import { SigninSchema, SignupSchema, verifySchema } from "./auth.schema";
 import type { Service } from "./auth.types";
-import { ENV } from "../../../utils/env.util";
 
 export class AuthController {
   constructor(private readonly service: Service) {}
@@ -61,28 +60,7 @@ export class AuthController {
       const user = await this.service.signin(result.data);
 
       const session = (req.session.userId = user?.id);
-      req.session.save((err) => {
-        console.log("SESSION SAVE:", err);
 
-        if (err) {
-          return next(err);
-        }
-
-        console.log("SESSION ID:", req.sessionID);
-
-        apiResponse({
-          req,
-          res,
-          message: "Signin Success",
-          status: 200,
-          data: user?.id,
-        });
-      });
-
-      console.log({
-        NODE_ENV: ENV.NODE_ENV,
-        sessionUserId: req.session.userId,
-      });
       apiResponse({
         req,
         res,
