@@ -7,6 +7,7 @@ import {
 import { apiResponse } from "../../../utils/apiResponse";
 import { SigninSchema, SignupSchema, verifySchema } from "./auth.schema";
 import type { Service } from "./auth.types";
+import { ENV } from "../../../utils/env.util";
 
 export class AuthController {
   constructor(private readonly service: Service) {}
@@ -64,6 +65,11 @@ export class AuthController {
         if (err) {
           console.log(err);
         }
+      });
+
+      console.log({
+        NODE_ENV: ENV.NODE_ENV,
+        sessionUserId: req.session.userId,
       });
       apiResponse({
         req,
