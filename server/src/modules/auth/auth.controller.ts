@@ -59,14 +59,23 @@ export class AuthController {
       }
       const user = await this.service.signin(result.data);
 
-      const session = (req.session.userId = user?.id);
+      // 1. Mutate req.session
+      req.session.userId = user?.id;
+
+      // 2. Explicitly wait for Redis session save before sending HTTP response
+      await new Promise<void>((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) return reject(err);
+          resolve();
+        });
+      });
 
       apiResponse({
         req,
         res,
         message: "Signin Success",
         status: 200,
-        data: session,
+        data: user,
       });
     } catch (error) {
       next(error);
