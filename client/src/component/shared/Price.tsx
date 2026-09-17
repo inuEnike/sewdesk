@@ -65,7 +65,7 @@ const Price = () => {
 
       const initialize = await PaymentService.initialize({
         subscription_id: subscription_id,
-        amount: Number(selectedPlan!.price),
+        amount: Number(selectedPlan!.price) * 100,
         currency: "NGN",
       });
 
