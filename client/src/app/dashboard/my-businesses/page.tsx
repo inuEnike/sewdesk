@@ -57,6 +57,7 @@ export default function YourBusinessesPage(): React.ReactElement {
     setCurrentBusinessId(id);
     localStorage.setItem("activeBusinessId", id);
   };
+console.log(businesses);
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground pb-16">
