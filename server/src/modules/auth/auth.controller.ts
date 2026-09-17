@@ -60,7 +60,11 @@ export class AuthController {
       const user = await this.service.signin(result.data);
 
       const session = (req.session.userId = user?.id);
-
+      req.session.save((err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
       apiResponse({
         req,
         res,
