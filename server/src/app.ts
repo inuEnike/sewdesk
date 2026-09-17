@@ -51,7 +51,14 @@ app.use(
   }),
 );
 
+console.log(ENV.NODE_ENV);
+
 const prefix = "/api/v1";
+
+console.log({
+  prefix,
+  nodeEnv: ENV.NODE_ENV,
+});
 
 app.use(`${prefix}/auth`, authRouter);
 app.use(`${prefix}/business`, businessRouter);
