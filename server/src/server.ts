@@ -24,6 +24,7 @@ const { app } = await import("./app.ts");
 
 const server = app.listen(PORT, async () => {
   logger.info(`SewDesk server listening on port ${PORT} 🔥`);
+  console.log(`Server running in ${ENV.NODE_ENV} mode on port ${PORT}`);
 
   if (ENV.NODE_ENV === "production") {
     await verifyResend();
