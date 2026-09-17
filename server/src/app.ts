@@ -15,7 +15,7 @@ import cors from "cors";
 
 export const app: Express = express();
 
-app.set("trust proxy", 1);
+app.set("trust proxy", true);
 
 app.use(
   express.json({
@@ -46,19 +46,13 @@ app.use(
       maxAge: 1000 * 60 * 60 * 7,
       sameSite: ENV.NODE_ENV === "production" ? "none" : "lax",
       secure: ENV.NODE_ENV === "production",
+      partitioned: ENV.NODE_ENV === "production",
     },
     rolling: true,
   }),
 );
 
-console.log(ENV.NODE_ENV);
-
 const prefix = "/api/v1";
-
-console.log({
-  prefix,
-  nodeEnv: ENV.NODE_ENV,
-});
 
 app.use(`${prefix}/auth`, authRouter);
 app.use(`${prefix}/business`, businessRouter);
