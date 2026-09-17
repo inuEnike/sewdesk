@@ -24,7 +24,6 @@ app.use(
     },
   }),
 );
-const isProd = ENV.NODE_ENV === "production";
 
 app.use(
   cors({
@@ -45,7 +44,8 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 7,
-      sameSite: isProd ? "none" : "lax",
+      sameSite: "none",
+      // sameSite: ENV.NODE_ENV === "production" ? "none" : "lax",
       secure: ENV.NODE_ENV === "production",
     },
     rolling: true,
