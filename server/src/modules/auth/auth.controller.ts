@@ -62,9 +62,21 @@ export class AuthController {
 
       const session = (req.session.userId = user?.id);
       req.session.save((err) => {
+        console.log("SESSION SAVE:", err);
+
         if (err) {
-          console.log(err);
+          return next(err);
         }
+
+        console.log("SESSION ID:", req.sessionID);
+
+        apiResponse({
+          req,
+          res,
+          message: "Signin Success",
+          status: 200,
+          data: user?.id,
+        });
       });
 
       console.log({
