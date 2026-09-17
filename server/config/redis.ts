@@ -4,7 +4,7 @@ import { ErrorLogger } from "./errorLog";
 import { ENV } from "../utils/env.util";
 
 export const redis = createClient({
-  url: ENV.REDIS_URL,
+  url:ENV.NODE_ENV === "production" ? ENV.REDIS_URL_PROD :ENV.REDIS_URL,
 });
 
 export const connectRedis = async () => {
