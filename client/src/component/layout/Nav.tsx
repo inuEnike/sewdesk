@@ -22,7 +22,7 @@ const Nav = () => {
     try {
       await logout();
       setMe(null);
-      router.push("/");
+      router.push("/login");
     } catch (error) {
       alert(error);
     }
@@ -30,6 +30,8 @@ const Nav = () => {
   function handleToggleNav() {
     setNavOpen((prev) => !prev);
   }
+  console.log(me);
+
   return (
     <>
       <nav
