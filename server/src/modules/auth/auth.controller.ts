@@ -69,7 +69,6 @@ export class AuthController {
           console.log("redis resolved");
           resolve();
         });
-        
       });
 
       apiResponse({
@@ -89,7 +88,11 @@ export class AuthController {
         return next(new BAD_REQUST_EXCEPTION(err.message));
       }
 
-      res.clearCookie("sewdesk.sid");
+      res.clearCookie("sewdesk.sid", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
 
       apiResponse({
         req,
