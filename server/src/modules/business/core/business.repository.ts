@@ -283,8 +283,8 @@ export class BusinessRepository implements Repository {
     const [business] = await this.sql<Business[]>`
       UPDATE business.businesses
       SET 
-        status=${status}
-        updated_at = NoW()
+        status=${status},
+        updated_at = NOW()
       WHERE id = ${businessId}
     `;
     return business ?? null;
