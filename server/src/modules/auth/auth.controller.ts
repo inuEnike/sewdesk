@@ -7,6 +7,7 @@ import {
 import { apiResponse } from "../../../utils/apiResponse";
 import { SigninSchema, SignupSchema, verifySchema } from "./auth.schema";
 import type { Service } from "./auth.types";
+import { ENV } from "../../../utils/env.util";
 
 export class AuthController {
   constructor(private readonly service: Service) {}
@@ -93,6 +94,7 @@ export class AuthController {
         secure: true,
         sameSite: "none",
         path: "/",
+        partitioned: ENV.NODE_ENV === "production",
       });
 
       apiResponse({
