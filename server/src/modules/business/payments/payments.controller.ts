@@ -125,6 +125,7 @@ export class PaymentController {
       }
 
       const event = req.body;
+console.log(event);
 
       const subscription = await this.paymentService.verifyWebhook(
         event?.payment_reference,

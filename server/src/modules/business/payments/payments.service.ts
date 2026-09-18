@@ -128,11 +128,6 @@ export class PaymentService {
       throw new NOT_FOUND_EXCEPTION("Payment not found");
     }
 
-    await this.paymentRepository.updateStatus(
-      payment.id,
-      PAYMENT_STATUS.COMPLETED,
-    );
-
     const subscription = await this.SubscriptionRepository.findById(
       payment.subscription_id,
     );
@@ -144,6 +139,10 @@ export class PaymentService {
     if (!subscription) {
       throw new NOT_FOUND_EXCEPTION("Subscription not found");
     }
+    await this.paymentRepository.updateStatus(
+      payment.id,
+      PAYMENT_STATUS.COMPLETED,
+    );
 
     const startedAt = new Date();
 
