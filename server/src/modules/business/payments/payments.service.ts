@@ -5,6 +5,7 @@ import {
 } from "../../../../middleware/error.middleware";
 import { generatePaymentReference } from "../../../../utils/genPaymentReference";
 import type { BusinessRepository } from "../core/business.repository";
+import { BUSINESS_STATUS } from "../core/business.types";
 import {
   SUBSCRIPTION_STATUS,
   type subscriptionRepository,
@@ -142,6 +143,11 @@ export class PaymentService {
     await this.paymentRepository.updateStatus(
       payment.id,
       PAYMENT_STATUS.COMPLETED,
+    );
+
+    await this.BusinessRepository.updateBusinessAfterPayment(
+      subscription.business_id,
+      BUSINESS_STATUS.ACTIVE,
     );
 
     const startedAt = new Date();
