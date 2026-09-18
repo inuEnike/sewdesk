@@ -66,8 +66,10 @@ export class AuthController {
       await new Promise<void>((resolve, reject) => {
         req.session.save((err) => {
           if (err) return reject(err);
+          console.log("redis resolved");
           resolve();
         });
+        
       });
 
       apiResponse({
@@ -75,7 +77,6 @@ export class AuthController {
         res,
         message: "Signin Success",
         status: 200,
-        data: user,
       });
     } catch (error) {
       next(error);
