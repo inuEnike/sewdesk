@@ -17,6 +17,27 @@ export const app: Express = express();
 
 app.set("trust proxy", true);
 
+// Debug middleware to check HTTPS protocol detection
+app.use((req, res, next) => {
+  console.log({
+    url: req.url,
+    secure: req.secure, // MUST be true in production
+    protocol: req.protocol, // MUST be "https"
+    headers: {
+      "x-forwarded-proto": req.headers["x-forwarded-proto"],
+      host: req.headers.host,
+    },
+  });
+  next();
+});
+
+app.use((req, res, next) => {
+  if (ENV.NODE_ENV === "production") {
+    req.headers["x-forwarded-proto"] = "https";
+  }
+  next();
+});
+
 app.use(
   express.json({
     verify: (req, res, buf) => {
