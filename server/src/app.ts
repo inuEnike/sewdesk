@@ -15,21 +15,7 @@ import cors from "cors";
 
 export const app: Express = express();
 
-app.set("trust proxy", true);
-
-// Debug middleware to check HTTPS protocol detection
-app.use((req, res, next) => {
-  console.log({
-    url: req.url,
-    secure: req.secure, // MUST be true in production
-    protocol: req.protocol, // MUST be "https"
-    headers: {
-      "x-forwarded-proto": req.headers["x-forwarded-proto"],
-      host: req.headers.host,
-    },
-  });
-  next();
-});
+app.set("trust proxy", 1);
 
 app.use((req, res, next) => {
   if (ENV.NODE_ENV === "production") {
