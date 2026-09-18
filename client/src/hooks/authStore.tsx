@@ -74,7 +74,7 @@ export const useAuth = create<AuthState>((set) => ({
         error.response?.data?.message ||
         error.response?.data?.error ||
         "An error occurred";
-
+        
       set({ loading: false, error: message });
       return {
         success: false,
