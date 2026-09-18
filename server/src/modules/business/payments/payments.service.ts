@@ -145,14 +145,10 @@ export class PaymentService {
       PAYMENT_STATUS.COMPLETED,
     );
 
-    console.log("Business id", subscription.business_id);
-
-    const business = await this.BusinessRepository.updateBusinessAfterPayment(
+    await this.BusinessRepository.updateBusinessAfterPayment(
       subscription.business_id,
       BUSINESS_STATUS.ACTIVE,
     );
-
-    console.log({business});
 
     const startedAt = new Date();
 
