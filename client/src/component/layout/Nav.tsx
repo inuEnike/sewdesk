@@ -17,7 +17,8 @@ const Nav = () => {
   const [navOpen, setNavOpen] = useState<boolean>(false);
   const { me, setMe } = useApp();
 
-  const logout = useAuth((state) => state.logout);
+  // const logout = useAuth((state) => state.logout);
+  const { logout } = useAuth();
   const handleLogout = async () => {
     try {
       await logout();
