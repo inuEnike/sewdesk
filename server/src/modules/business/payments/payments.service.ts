@@ -152,7 +152,7 @@ export class PaymentService {
       BUSINESS_STATUS.ACTIVE,
     );
 
-    console.log(business);
+    console.log({business});
 
     const startedAt = new Date();
 
