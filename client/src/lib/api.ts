@@ -5,4 +5,3 @@ export const api = axios.create({
   baseURL: env.BACKEND_URI,
   withCredentials: true,
 });
-
