@@ -22,9 +22,7 @@ export class PaymentController {
         throw new UNAUTHORIZED_EXCEPTION("You must be logged in first");
       }
 
-
       const payment = await this.paymentService.create(data, userId);
-
 
       return apiResponse({
         req,
@@ -107,28 +105,24 @@ export class PaymentController {
 
   verifyWebhook = async (req: Request, res: Response, next: NextFunction) => {
     try {
-
       if (!req.rawBody) {
         throw new Error("Raw request body is missing");
       }
-
 
       const hash = crypto
         .createHmac("sha512", ENV.PAYSTACK_SECRET_KEY)
         .update(req.rawBody)
         .digest("hex");
 
-
-
       if (hash !== req.headers["x-paystack-signature"]) {
         throw new UNAUTHORIZED_EXCEPTION("Invalid Paystack signature");
       }
 
       const event = req.body;
-console.log(event);
+      console.log(event);
 
       const subscription = await this.paymentService.verifyWebhook(
-        event?.payment_reference,
+        event?.data?.reference,
       );
 
       return apiResponse({
