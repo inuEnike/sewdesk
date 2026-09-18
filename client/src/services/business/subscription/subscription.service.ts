@@ -3,12 +3,19 @@ import { CreateSubscriptionDto } from "./subscription.type";
 
 export class SubscriptionService {
   static async create(data: CreateSubscriptionDto) {
-    const plans = await api.post("/subscription", data);
+    const subscription = await api.post("/subscription", data);
 
-    if (plans.status != 201) {
-      throw new Error(plans?.data?.error);
+    if (subscription.status != 201) {
+      throw new Error(subscription?.data?.error);
     }
-    return plans.data;
+    return subscription.data;
   }
-  // static async ini
+  static async getByBusinessId(id: string) {
+    const subscription = await api.get(`/subscription/business/${id}`);
+
+    if (subscription.status != 200) {
+      throw new Error(subscription?.data?.error);
+    }
+    return subscription.data;
+  }
 }

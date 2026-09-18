@@ -27,7 +27,9 @@ export interface subscriptionRepository {
 
 export enum SUBSCRIPTION_STATUS {
   PENDING = "pending",
+  TRIALING = "trialing",
   ACTIVE = "active",
+  EXPIRED = "expired",
   CANCELLED = "cancelled",
 }
 
@@ -37,6 +39,7 @@ export interface Subscription {
   plan_id: string;
   status: SUBSCRIPTION_STATUS;
   started_at: string | null;
+  trial_ends_at: string | null;
   expires_at: string | null;
   created_at: string;
   updated_at: string;

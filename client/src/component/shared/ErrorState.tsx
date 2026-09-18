@@ -18,6 +18,7 @@ const ErrorState = ({
   onClose,
 }: ErrorStateProps) => {
   const needsVerification = message === "Please verify your account";
+  const AlreadySubscribed = message === "Business already has a subscription";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-secondary/60 px-5 animate-modal-backdrop">
@@ -43,6 +44,10 @@ const ErrorState = ({
           {needsVerification ? (
             <Link href="/verify" className="my-3 w-full">
               <Button variant="full">Verify your account</Button>
+            </Link>
+          ) : AlreadySubscribed ? (
+            <Link href="/dashboard/my-businesses" className="my-3 w-full">
+              <Button variant="full">Go back to pay</Button>
             </Link>
           ) : (
             <div className="my-3 w-full">

@@ -25,7 +25,7 @@ export class AuthService implements Service {
 
   signup = async (data: SignupDTO): Promise<{ message: string }> => {
     if (data.repeat_password !== data.hashed_password) {
-      throw new Error("Passwords don't match");
+      throw new NOT_FOUND_EXCEPTION("Passwords don't match");
     }
 
     // check for temp email

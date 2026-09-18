@@ -4,11 +4,13 @@ import { BusinessService } from "./business.service";
 import { BusinessRepository } from "./business.repository";
 import { sql } from "../../../../config/db";
 import { authMiddleware } from "../../../../middleware/auth.middleware";
+import { SubscriptionRepositoryImpl } from "../subscription/subscription.repository";
 
 const router = Router();
 
 const repository = new BusinessRepository(sql);
-const service = new BusinessService(repository);
+const subscriptionRepository = new SubscriptionRepositoryImpl(sql);
+const service = new BusinessService(repository, subscriptionRepository);
 const controller = new BusinessController(service);
 
 router

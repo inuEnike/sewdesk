@@ -2,14 +2,14 @@
 
 import Button from "@/component/ui/Button";
 import Logo from "@/component/ui/Logo";
-import { PaymentService } from "@/services/business/payment/payment.service";
 import { PlanService } from "@/services/business/plan/plan.service";
 import { SubscriptionService } from "@/services/business/subscription/subscription.service";
 import { useQuery } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { LuChevronDown, LuListChecks } from "react-icons/lu";
+import ErrorState from "./ErrorState";
 
 type Plan = {
   id: string;
@@ -38,48 +38,47 @@ const Price = () => {
 
   const [selectedId, setSelectedId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [message, setMessage] = useState("");
   const selectedPlan = useMemo(
     () => plans.find((plan) => plan.id === selectedId),
     [plans, selectedId],
   );
-
-  console.log({
-    businessId,
-    planId: selectedId,
-    plans: selectedPlan,
-  });
-
   const handleContinue = async () => {
     if (!selectedId || !businessId) return;
 
     try {
       setIsSubmitting(true);
 
-      const subscription = await SubscriptionService.create({
+      const response = await SubscriptionService.create({
         business_id: businessId,
         plan_id: selectedId,
       });
 
-      const subscription_id = subscription.data.id;
+      const subscription = response.data;
 
-      const initialize = await PaymentService.initialize({
-        subscription_id: subscription_id,
-        amount: Number(selectedPlan!.price) * 100,
-        currency: "NGN",
-      });
+      if (
+        subscription.status === "trialing" &&
+        subscription.trial_ends_at &&
+        new Date(subscription.trial_ends_at) > new Date()
+      ) {
+        router.push("/dashboard/my-businesses");
+        return;
+      }
 
-      const redirect_url = initialize?.data?.authorization_url;
-
-      router.push(redirect_url);
-    } catch (error) {
+      if (subscription.status === "active") {
+        router.push("/dashboard/my-businesses");
+        return;
+      }
+    } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        console.error("Request failed");
-        console.error("Status:", error.response?.status);
-        console.error("Message:", error.response?.data?.message);
-        console.error("Response:", error.response?.data);
+        const message =
+          error.response?.data?.message ||
+          error.response?.data?.error ||
+          "An error occurred";
+
+        setMessage(message);
       } else {
-        console.error("Unexpected Error:", error);
+        setMessage("An unexpected error occurred");
       }
     } finally {
       setIsSubmitting(false);
@@ -88,6 +87,13 @@ const Price = () => {
 
   return (
     <section className="flex min-h-[70vh] items-center justify-center py-10">
+      {message && message ? (
+        <ErrorState
+          onClose={() => setMessage("")}
+          message={message}
+          title="Something occurred"
+        />
+      ) : null}
       <div className="w-full max-w-md rounded-2xl border border-border/70 bg-white p-6 sm:p-8">
         {/* Header */}
         <div className="flex flex-col items-center gap-2 text-center">
@@ -96,7 +102,7 @@ const Price = () => {
           <h1 className="text-xl font-bold text-sidebar">Choose your plan</h1>
 
           <p className="mt-1 text-xs font-semibold text-light-text">
-            Pick a plan to continue to payment.
+            Choose a plan to start your 14-day free trial.
           </p>
         </div>
 

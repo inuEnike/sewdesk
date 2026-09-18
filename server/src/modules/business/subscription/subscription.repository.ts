@@ -21,14 +21,22 @@ export class SubscriptionRepositoryImpl implements SubscriptionRepositoryInterfa
   create = async (data: SubscriptionDTO): Promise<Subscription | null> => {
     try {
       const [subscription] = await this.sql<Subscription[]>`
-        INSERT INTO business.subscription (
+          INSERT INTO business.subscription (
           business_id,
-          plan_id
+          plan_id,
+          status,
+          started_at,
+          trial_ends_at
         )
         VALUES (
           ${data.business_id},
-          ${data.plan_id}
+          ${data.plan_id},
+          ${SUBSCRIPTION_STATUS.TRIALING},
+          NOW(),
+          NOW() + INTERVAL '14 days'
         )
+
+
         RETURNING *
       `;
 

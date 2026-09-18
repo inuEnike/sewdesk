@@ -5,7 +5,10 @@ import type { PaymentService } from "./payments.service";
 import { PaymentSchema } from "./payments.schema";
 import { apiResponse } from "../../../../utils/apiResponse";
 import crypto from "crypto";
-import { UNAUTHORIZED_EXCEPTION } from "../../../../middleware/error.middleware";
+import {
+  NOT_FOUND_EXCEPTION,
+  UNAUTHORIZED_EXCEPTION,
+} from "../../../../middleware/error.middleware";
 import { ENV } from "../../../../utils/env.util";
 
 export class PaymentController {
@@ -106,7 +109,7 @@ export class PaymentController {
   verifyWebhook = async (req: Request, res: Response, next: NextFunction) => {
     try {
       if (!req.rawBody) {
-        throw new Error("Raw request body is missing");
+        throw new NOT_FOUND_EXCEPTION("Raw request body is missing");
       }
 
       const hash = crypto
@@ -119,7 +122,6 @@ export class PaymentController {
       }
 
       const event = req.body;
-      console.log(event?.data?.reference);
 
       const subscription = await this.paymentService.verifyWebhook(
         event?.data?.reference,

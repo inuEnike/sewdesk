@@ -1,13 +1,14 @@
 "use client";
+import ErrorState from "@/component/shared/ErrorState";
 import { BusinessService } from "@/services/business/business.service";
 import { Business } from "@/services/business/validation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Page = () => {
- 
   const { slug } = useParams();
+  const router = useRouter();
   const [business, setBusiness] = useState<Business | null>(null);
   const query = useQuery({
     queryKey: ["business"],
@@ -23,11 +24,23 @@ const Page = () => {
     getBusinessData();
   }, [business?.id]);
 
+  if (business?.status === "pending") {
+    return (
+      <ErrorState
+        onClose={() => router.push("/dashboard/my-businesses")}
+        message="Trial Expired, Please subscribe"
+        title="Trial Expired"
+      />
+    );
+  }
+
   return (
     <div>
       <p>address: {business?.address}</p>
       <p>business email: {business?.business_email}</p>
-      <p>owner if: {business?.business_owner_id}</p>
+      <p>owner id: {business?.business_owner_id}</p>
+
+      {/* <p>{query.data.address}</p> */}
     </div>
   );
 };
