@@ -1,17 +1,32 @@
 import type { Sql } from "postgres";
-import type { Business, Repository, Service } from "./business.types";
+import {
+  BUSINESS_STATUS,
+  type Business,
+  type Repository,
+  type Service,
+} from "./business.types";
 import {
   BAD_REQUST_EXCEPTION,
   CONFLICT_EXCEPTION,
   NOT_FOUND_EXCEPTION,
+  UNAUTHORIZED_EXCEPTION,
 } from "../../../../middleware/error.middleware";
 import type { businessDTO } from "./business.schema";
 import { logger } from "../../../../config/logger";
+import {
+  SUBSCRIPTION_STATUS,
+  type subscriptionRepository,
+} from "../subscription/subscription.types";
 
 export class BusinessService implements Service {
   private readonly repository: Repository;
-  constructor(repository: Repository) {
+  private readonly SubscriptionRepository: subscriptionRepository;
+  constructor(
+    repository: Repository,
+    subscriptionRepository: subscriptionRepository,
+  ) {
     this.repository = repository;
+    this.SubscriptionRepository = subscriptionRepository;
   }
 
   getLoggedInUserBusinesses = async (slug: string): Promise<Business[]> => {
@@ -79,6 +94,31 @@ export class BusinessService implements Service {
 
     if (!business) {
       throw new NOT_FOUND_EXCEPTION("Business with the slug not found ");
+    }
+
+    const subscription = await this.SubscriptionRepository.findByBusinessId(
+      business.id,
+    );
+
+    if (
+      subscription &&
+      subscription.status === SUBSCRIPTION_STATUS.TRIALING &&
+      subscription.trial_ends_at &&
+      new Date(subscription.trial_ends_at) <= new Date()
+    ) {
+      await this.SubscriptionRepository.updateStatus(
+        subscription.id,
+        SUBSCRIPTION_STATUS.EXPIRED,
+      );
+
+      await this.repository.updateBusinessStatus(
+        business.id,
+        BUSINESS_STATUS.PENDING,
+      );
+
+      business.status = BUSINESS_STATUS.PENDING;
+
+      throw new UNAUTHORIZED_EXCEPTION("Trial Expired, please pays");
     }
 
     // send the business

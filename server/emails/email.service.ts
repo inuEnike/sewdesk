@@ -1,4 +1,5 @@
 import { resend, transport } from "../config/emailCLient";
+import { BAD_REQUST_EXCEPTION } from "../middleware/error.middleware";
 
 import { ENV } from "../utils/env.util";
 
@@ -27,7 +28,7 @@ export class EmailService {
 
     if (ENV.NODE_ENV === "production") {
       if (!resend) {
-        throw new Error("Resend is not configured");
+        throw new BAD_REQUST_EXCEPTION("Resend is not configured");
       }
 
       const { data, error } = await resend.emails.send({
@@ -39,14 +40,14 @@ export class EmailService {
       });
 
       if (error) {
-        throw new Error(error.message);
+        throw new BAD_REQUST_EXCEPTION(error.message);
       }
 
       return data;
     }
 
     if (!transport) {
-      throw new Error("Nodemailer is not configured");
+      throw new BAD_REQUST_EXCEPTION("Nodemailer is not configured");
     }
 
     return await transport.sendMail({

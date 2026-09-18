@@ -7,11 +7,6 @@ export const BUSINESS_STATUS = {
   SUSPENDED: "suspended",
 } as const;
 
-// const BUSINESS_PLAN = {
-//   SEWDESK: "sewdesk",
-//   SEWDESK_PRO: "sewdesk_pro",
-// };
-
 export type BusinessStatus =
   (typeof BUSINESS_STATUS)[keyof typeof BUSINESS_STATUS];
 
@@ -73,5 +68,10 @@ export interface Repository {
     id: string,
     userId: string,
     data: Partial<businessDTO>,
+  ) => Promise<Business | null>;
+
+  updateBusinessStatus: (
+    businessId: string,
+    status: string,
   ) => Promise<Business | null>;
 }

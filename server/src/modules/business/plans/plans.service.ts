@@ -66,7 +66,7 @@ export class PlanService implements Service {
     const existingPlan = await this.planRepository.getPlanById(id);
 
     if (!existingPlan) {
-      throw new Error(`Plan with the id of ${id} was not found`);
+      throw new NOT_FOUND_EXCEPTION(`Plan with the id of ${id} was not found`);
     }
 
     return await this.planRepository.deletePlanById(id);

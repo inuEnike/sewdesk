@@ -4,6 +4,7 @@ import { Resend } from "resend";
 import { ENV } from "../utils/env.util";
 import { logger } from "./logger";
 import { ErrorLogger } from "./errorLog";
+import { NOT_FOUND_EXCEPTION } from "../middleware/error.middleware";
 
 export const transport =
   ENV.NODE_ENV !== "production"
@@ -36,7 +37,7 @@ export const verifyResend = async () => {
 
   try {
     if (!ENV.MAILER_PASSWORD) {
-      throw new Error("RESEND_API_KEY is missing");
+      throw new NOT_FOUND_EXCEPTION("RESEND_API_KEY is missing");
     }
 
     logger.info("Resend configured successfully 🚀");

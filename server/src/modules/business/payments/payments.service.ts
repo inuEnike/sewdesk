@@ -145,7 +145,7 @@ export class PaymentService {
       PAYMENT_STATUS.COMPLETED,
     );
 
-    await this.BusinessRepository.updateBusinessAfterPayment(
+    await this.BusinessRepository.updateBusinessStatus(
       subscription.business_id,
       BUSINESS_STATUS.ACTIVE,
     );

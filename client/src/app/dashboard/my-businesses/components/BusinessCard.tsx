@@ -8,21 +8,22 @@ import {
   FiMapPin,
   FiPhone,
 } from "react-icons/fi";
+import { getStatusBadge } from "@/lib/utils/getStatusBadge";
+import { formattedDate } from "@/lib/utils/formattedDate";
+import { BUSINESS_STATUS } from "./BusinessStatus";
+import { logoInitials } from "@/lib/utils/logoInitials";
+import { SubscriptionResponse } from "@/services/business/subscription/subscription.type";
 
-export const BUSINESS_STATUS = {
-  PENDING: "pending",
-  ACTIVE: "active",
-  SUSPENDED: "suspended",
-} as const;
-
-interface BusinessCardProps {
+export interface BusinessCardProps {
   business: Business;
   isCurrent?: boolean;
+  subscription?: SubscriptionResponse | null;
   onSelect?: () => void;
 }
 
 export const BusinessCard = ({
   business,
+  subscription,
   isCurrent = false,
   onSelect,
 }: BusinessCardProps): React.ReactElement => {
@@ -38,49 +39,20 @@ export const BusinessCard = ({
 
   const isPending = status?.toLowerCase() === BUSINESS_STATUS.PENDING;
 
-  // Dynamic link destination
-  const targetHref = isPending
-    ? `/dashboard/checkout/${id}` 
-    : `/dashboard/${slug}`;
+  const trialExpired = subscription?.status === "expired";
 
-  // Dynamic button label
+  const targetHref = trialExpired
+    ? `/dashboard/payment/${id}`
+    : isPending
+      ? `/dashboard/checkout/${id}`
+      : `/dashboard/home/${slug}`;
+
   const getButtonLabel = () => {
-    if (isPending) return "Proceed to Payment";
+    if (trialExpired) return "Pay Now";
+    if (isPending) return "Start Free Trial";
     if (isCurrent) return "Open Dashboard";
+
     return "Switch to Business";
-  };
-
-  // Extract initials from business name
-  const logoInitials = business_name
-    ? business_name
-        .split(" ")
-        .map((word) => word[0])
-        .join("")
-        .toUpperCase()
-        .slice(0, 2)
-    : "BI";
-
-  // Format creation date
-  const formattedDate = created_at
-    ? new Date(created_at).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        timeZone: "UTC",
-      })
-    : "N/A";
-
-  const getStatusBadge = (st: string): string => {
-    switch (st.toLowerCase()) {
-      case BUSINESS_STATUS.ACTIVE:
-        return "bg-emerald-primary/10 text-emerald-primary border-emerald-primary/20";
-      case BUSINESS_STATUS.PENDING:
-        return "bg-amber-500/10 text-amber-600 border-amber-500/20";
-      case BUSINESS_STATUS.SUSPENDED:
-        return "bg-danger/10 text-danger border-danger/20";
-      default:
-        return "bg-muted text-muted-foreground border-border";
-    }
   };
 
   return (
@@ -111,7 +83,7 @@ export const BusinessCard = ({
                   : "bg-icon-background text-icon-color border-border"
               }`}
             >
-              {logoInitials}
+              {logoInitials(business_name)}
             </div>
 
             {/* Business Details */}
@@ -165,7 +137,7 @@ export const BusinessCard = ({
 
           <div className="flex items-center gap-1.5 min-w-0">
             <FiCalendar className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-            <span>Created {formattedDate}</span>
+            <span>Created {formattedDate(created_at)}</span>
           </div>
         </div>
       </div>

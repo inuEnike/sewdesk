@@ -276,17 +276,29 @@ export class BusinessRepository implements Repository {
     }
   };
 
-  updateBusinessAfterPayment = async (
+  updateBusinessStatus = async (
     businessId: string,
     status: string,
   ): Promise<Business | null> => {
-    const [business] = await this.sql<Business[]>`
+    try {
+      const [business] = await this.sql<Business[]>`
       UPDATE business.businesses
       SET 
         status=${status},
         updated_at = NOW()
       WHERE id = ${businessId}
+      RETURNING *
+
     `;
-    return business ?? null;
+      return business ?? null;
+    } catch (error) {
+      ErrorLogger(error);
+      if (ENV.NODE_ENV === "development") {
+        
+        throw new BAD_REQUST_EXCEPTION(error as string);
+      } else {
+        throw new BAD_REQUST_EXCEPTION("An error occured while updating");
+      }
+    }
   };
 }
