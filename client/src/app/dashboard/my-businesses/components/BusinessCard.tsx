@@ -45,7 +45,7 @@ export const BusinessCard = ({
     ? `/dashboard/payment/${id}`
     : isPending
       ? `/dashboard/checkout/${id}`
-      : `/dashboard/home/${slug}`;
+      : `/dashboard/${slug}/home`;
 
   const getButtonLabel = () => {
     if (trialExpired) return "Pay Now";

@@ -1,15 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import MobileSidebar from "./_components/navigation/MobileSideBar";
-import Sidebar from "./_components/navigation/Sidebar";
-import { useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import MobileSidebar from "../_components/navigation/MobileSideBar";
+import Sidebar from "../_components/navigation/Sidebar";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useBusinessBySlug } from "@/hooks/useBusinessBySlug";
 import ErrorState from "@/component/shared/ErrorState";
-import TopBar from "./_components/navigation/TopBar";
+import TopBar from "../_components/navigation/TopBar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { slug } = useParams();
   const router = useRouter();
+  const pathname = usePathname();
   const { business } = useBusinessBySlug(slug);
 
   if (business?.status === "pending") {
@@ -24,13 +25,17 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   const [toggleSideBar, setToggleSIdeBar] = useState<boolean>(false);
 
+  useEffect(() => {
+    setToggleSIdeBar((prev) => !prev);
+  }, [pathname]);
+
   const handleToggleSideBar = () => {
     setToggleSIdeBar((prev) => !prev);
   };
   return (
     <section className="bg-icon-background w-full h-screen flex">
       {toggleSideBar && (
-        <div className="w-full fixed top-0 z-50">
+        <div className="">
           <MobileSidebar onclick={handleToggleSideBar} />
         </div>
       )}
