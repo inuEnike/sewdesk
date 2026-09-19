@@ -1,15 +1,16 @@
 import Logo from "@/component/ui/Logo";
 import React from "react";
-import { sidebarNavigation } from "../SidebarLinks";
 import { useParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { LuLogOut } from "react-icons/lu";
 import { useBusinessBySlug } from "@/hooks/useBusinessBySlug";
+import SideNavLinks from "../SidebarLinks";
 
 const Sidebar = () => {
   const pathname = usePathname();
   const { slug } = useParams();
   const { business } = useBusinessBySlug(slug);
+  const sidebarNavigation = SideNavLinks();
   return (
     <section className="bg-background-sidebar w-[30%] xl:w-[16%] 2xl:w-[15%] text-background not-md:hidden ">
       <div className="flex flex-col h-screen justify-between">
