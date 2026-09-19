@@ -1,47 +1,21 @@
 "use client";
-import ErrorState from "@/component/shared/ErrorState";
-import { BusinessService } from "@/services/business/business.service";
-import { Business } from "@/services/business/validation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+
+import { getTodaysDate } from "@/lib/utils/getTodaysDate";
 
 const Page = () => {
-  const { slug } = useParams();
-  const router = useRouter();
-  const [business, setBusiness] = useState<Business | null>(null);
-  const query = useQuery({
-    queryKey: ["business"],
-    queryFn: () => BusinessService.getBusinessBySlug(slug),
-  });
-  useEffect(() => {
-    const getBusinessData = async () => {
-      const res = await BusinessService.getBusinessBySlug(slug);
-
-      setBusiness(res.data);
-    };
-
-    getBusinessData();
-  }, [business?.id]);
-
-  if (business?.status === "pending") {
-    return (
-      <ErrorState
-        onClose={() => router.push("/dashboard/my-businesses")}
-        message="Trial Expired, Please subscribe"
-        title="Trial Expired"
-      />
-    );
-  }
+  const { getDayOfTheWeek, getMonthOfTheYear, getToday } = getTodaysDate();
 
   return (
-    <div>
-      <p>address: {business?.address}</p>
-      <p>business email: {business?.business_email}</p>
-      <p>owner id: {business?.business_owner_id}</p>
-
-      {/* <p>{query.data.address}</p> */}
-    </div>
+    <main className="px-7 lg:px-12 py-7 lg:py-10">
+      <div className="">
+        <h1 className="text-2xl font-bold">Good Morning, Alexandro</h1>
+        <p className="text-light-text text-xs not-mdfont-light md:text-sm py-2">
+          Sartoria Rossi Milano workspace is fully synchronized •{" "}
+          <span>{getDayOfTheWeek}</span>, <span>{getMonthOfTheYear}</span>{" "}
+          <span>{getToday}</span>
+        </p>
+      </div>
+    </main>
   );
 };
 
