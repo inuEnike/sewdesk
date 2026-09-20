@@ -24,10 +24,10 @@ const MobileSidebar = ({ onclick }: { onclick: () => void }) => {
       <div className="relative h-screen w-[65%] bg-background-sidebar text-background md:hidden">
         {/* Close button */}
         <button
-          className="absolute -right-10 top-5 z-50 px-1 py-2"
+          className="absolute -right-7 top-5 z-50 px-1 py-2"
           onClick={onclick}
         >
-          <CgClose className="font-bold text-background-sidebar" />
+          <CgClose className="font-bold text-xl text-background-sidebar" />
         </button>
 
         {/* Scrollable content */}
