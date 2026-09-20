@@ -26,14 +26,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const [toggleSideBar, setToggleSIdeBar] = useState<boolean>(false);
 
   useEffect(() => {
-    setToggleSIdeBar((prev) => !prev);
+    setToggleSIdeBar(false);
   }, [pathname]);
 
   const handleToggleSideBar = () => {
     setToggleSIdeBar((prev) => !prev);
   };
   return (
-    <section className="bg-icon-background w-full h-screen flex">
+    <section className="bg-icon-background w-full h-auto flex">
       {toggleSideBar && (
         <div className="">
           <MobileSidebar onclick={handleToggleSideBar} />
