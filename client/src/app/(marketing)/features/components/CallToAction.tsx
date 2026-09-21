@@ -1,6 +1,7 @@
 import Button from "@/component/ui/Button";
 import Link from "next/link";
 import React from "react";
+import { SiFreecad } from "react-icons/si";
 
 const CallToAction = () => {
   return (
@@ -14,7 +15,7 @@ const CallToAction = () => {
           their operations.
         </p>
         <Link href={"/signup"}>
-          <Button children="Start Your 14-Day Free Trial" />
+          <Button children="Start Your 14-Day Free Trial" Icon={SiFreecad} />
         </Link>
       </div>
     </section>

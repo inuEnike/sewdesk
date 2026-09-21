@@ -6,6 +6,8 @@ import Input from "@/component/ui/Input";
 import Button from "@/component/ui/Button";
 import { BusinessService } from "@/services/business/business.service";
 import ErrorState from "@/component/shared/ErrorState";
+import { MdCreateNewFolder } from "react-icons/md";
+import { CgSpinner } from "react-icons/cg";
 
 const AddBusinessForm = () => {
   const [formData, setFormData] = useState({
@@ -144,9 +146,17 @@ const AddBusinessForm = () => {
             variant="sm"
             type="submit"
             disabled
+            Icon={CgSpinner}
+            showIcon
           />
         ) : (
-          <Button children="Create Business" variant="sm" type="submit" />
+          <Button
+            children="Create Business"
+            variant="sm"
+            type="submit"
+            showIcon
+            Icon={MdCreateNewFolder}
+          />
         )}
       </div>
     </form>

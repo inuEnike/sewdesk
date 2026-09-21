@@ -14,7 +14,7 @@ const Footer = () => {
           <Logo isDark />
           <p className="w-full md:dw-87.5 text-xs py-5 leading-6 text-light-text">
             The complete operating system for modern Nigerian fashion designers
-            and tailors. Manage orders, clients, measurements, and payouts in
+            and tailors, seamstress. Manage orders, clients, measurements, and payouts in
             one smart app.
           </p>
           <div className="flex items-center gap-3">

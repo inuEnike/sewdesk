@@ -5,6 +5,7 @@ import Logo from "@/component/ui/Logo";
 import { PlanService } from "@/services/business/plan/plan.service";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
+import { BsForward } from "react-icons/bs";
 import { LuChevronDown, LuListChecks } from "react-icons/lu";
 
 type Plan = {
@@ -119,6 +120,7 @@ const Price = () => {
             onClick={handleContinue}
             disabled={!selectedId}
             children="Proceed to payment"
+            Icon={BsForward}
           ></Button>
         </div>
       </div>
