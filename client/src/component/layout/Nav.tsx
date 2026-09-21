@@ -112,10 +112,12 @@ const Nav = () => {
             <ul className="authActions gap-4 flex flex-col items-center pb-2 md:hidden text-[15px]">
               {me === null ? (
                 <>
-                  <Link href={"/login"} className="text-light-text">
-                    Log In
-                  </Link>
-                  <Button children="Get Started" Icon={SiAuth0} />
+               <Link href={"/login"} className="text-light-text">
+                  Log In
+               </Link>
+
+               <Button children="Get Started" Icon={SiAuth0} />
+                
                 </>
               ) : (
                 <Link href={"/dashboard/my-businesses"}>
