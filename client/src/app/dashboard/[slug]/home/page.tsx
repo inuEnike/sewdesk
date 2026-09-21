@@ -6,11 +6,12 @@ import { useGreet } from "@/hooks/useGreet";
 import { getTodaysDate } from "@/lib/utils/getTodaysDate";
 import { useParams } from "next/navigation";
 import Kpi from "../../_components/kpi/Kpi";
-import { orderData } from "@/lib/seed/orderData";
 import RevenueCard from "../../_components/RevenueCard";
 import Button from "@/component/ui/Button";
 import OutlineButton from "@/component/ui/OutlineButton";
 import { IoAdd, IoPeople } from "react-icons/io5";
+import Link from "next/link";
+import FittingsCard from "../../_components/FittingsCard";
 
 const Page = () => {
   const { getDayOfTheWeek, getMonthOfTheYear, getToday } = getTodaysDate();
@@ -36,20 +37,20 @@ const Page = () => {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <Button children="New Order" Icon={IoAdd} showIcon/>
-          <OutlineButton Icon={IoPeople} showIcon={true} children="Add Customer"/>
+          <Button children="New Order" Icon={IoAdd} />
+          <OutlineButton Icon={IoPeople} children="Add Customer" />
         </div>
       </div>
       <section>
         <Kpi />
-        <div className="grid grid-cols-1 xl:grid-cols-[1.5fr_1fr] gap-7">
+        <div className="grid grid-cols-1 xl:grid-cols-[1.7fr_1fr] gap-7">
           <RevenueCard />
-          <div className="bg-white p-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold">Fittings & Appointments</h3>
-              <p className="text-xs text-primary font-semibold">View All</p>
-            </div>
-          </div>
+          <FittingsCard />
+        </div>
+
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_1.7fr] gap-7 my-6">
+          <div className="bg-white">p</div>
+          <div className="bg-white">q</div>
         </div>
       </section>
     </main>

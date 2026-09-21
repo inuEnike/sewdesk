@@ -29,6 +29,8 @@
   
   --icon-color: #2563EB;
   
+  --text-light-small: #6B7280;
+
   --digit-color: #c7dbf2cb;
 
   --border: #e5e7eb;
@@ -67,6 +69,8 @@
   --color-muted-foreground: var(--muted-foreground);
 
   --color-footer-icon-background: var(--footer-icon);
+
+  --color-text-light-small: var(--text-light-small);
 
   --color-light-text: var(--light-text);
 
