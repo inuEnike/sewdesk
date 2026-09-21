@@ -15,7 +15,7 @@ const KpiCard = ({
   KpiBackgroundIcon,
 }: KpiCard) => {
   return (
-    <div className="bg-white rounded-lg shadow-xs not-sm:h-20s not-sm:h-auto not-sm:py-3 h-36.25 flex flex-col justify-center px-3">
+    <div className="bg-white rounded-lg shadow-xs not-sm:h-20s not-sm:h-auto not-sm:py-3 h-36.25 flex flex-col justify-center px-3 border-border border">
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium text-muted-foreground">
           {KpiCardTitle}
@@ -26,8 +26,8 @@ const KpiCard = ({
           <KpiCardIcon className="text-primary" />
         </div>
       </div>
-      <div className="py-2">
-        <p className="text-2xl font-bold">{KpiCardValue}</p>
+      <div className="py-1">
+        <p className="text-2xl font-extrabold">{KpiCardValue}</p>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { IconType } from "react-icons";
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -6,6 +7,7 @@ type ButtonProps = {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  Icon: IconType;
   showIcon?: boolean;
 };
 
@@ -16,6 +18,7 @@ const OutlineButton = ({
   type = "button",
   disabled = false,
   showIcon = false,
+  Icon,
 }: ButtonProps) => {
   const variants = {
     sm: "w-fit px-4",
@@ -28,9 +31,12 @@ const OutlineButton = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`h-11 rounded-md bg-transparent text-sm font-semibold text-light-text shadow-sm cursor-pointer ${variants[variant]} disabled:cursor-not-allowed disabled:opacity-50`}
+      className={`h-11 rounded-md bg-transparent text-sm font-semibold flex items-center gap-2 text-light-text shadow-sm cursor-pointer ${variants[variant]} disabled:cursor-not-allowed disabled:opacity-50`}
     >
-      {children}
+      <>
+        {showIcon && <Icon />}
+        {children}
+      </>
     </button>
   );
 };

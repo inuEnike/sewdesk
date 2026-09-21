@@ -7,6 +7,9 @@ import Link from "next/link";
 import React, { ChangeEvent, useState } from "react";
 import Heading from "./Heading";
 import { useRouter } from "next/navigation";
+import { CgSpinner } from "react-icons/cg";
+import { BiDoorOpen } from "react-icons/bi";
+import { VscGitPullRequestCreate } from "react-icons/vsc";
 
 const SignupForm = () => {
   const [form, setForm] = useState({
@@ -109,12 +112,21 @@ const SignupForm = () => {
           placeholder="**********"
         />
         {loading ? (
-          <Button children="Loading..." variant="full" type="submit" disabled />
+          <Button
+            children="Loading..."
+            variant="full"
+            type="submit"
+            disabled
+            Icon={CgSpinner}
+            showIcon
+          />
         ) : (
           <Button
             children="Create your SewDesk account"
             variant="full"
             type="submit"
+            Icon={VscGitPullRequestCreate}
+            showIcon
           />
         )}
 

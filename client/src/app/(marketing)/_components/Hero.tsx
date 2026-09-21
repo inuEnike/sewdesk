@@ -1,11 +1,11 @@
 import Button from "@/component/ui/Button";
 import OutlineButton from "@/component/ui/OutlineButton";
 import Image from "next/image";
-import React from "react";
-import { AiFillYoutube } from "react-icons/ai";
+import { AiFillYoutube, AiOutlineBuild, AiOutlineYoutube } from "react-icons/ai";
 import { GiNigeria } from "react-icons/gi";
 
 const Hero = () => {
+  console.log("IoWatch:", AiOutlineYoutube);
   return (
     <section className="m-auto my-10 md:my-20 flex flex-col items-center gap-7 px-5 md:text-center">
       <div className="bg-white shadow-xs px-7 py-2 rounded-full">
@@ -24,8 +24,10 @@ const Hero = () => {
         expensive fabrics, and monitor payments in one clean platform.
       </p>
       <div className="flex items-center gap-3 not-md:w-full">
-        <Button children="Get Started " variant="md" />
-        <OutlineButton children={`Watch a Demo`} variant="md" showIcon={true} />
+        <Button children="Get Started " variant="md" Icon={AiOutlineBuild}/>
+        <OutlineButton variant="md" Icon={AiOutlineYoutube}>
+          Watch a Demo
+        </OutlineButton>
       </div>
 
       <div className="w-full max-w-5xl mt-4">

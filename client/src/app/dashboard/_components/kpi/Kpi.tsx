@@ -6,10 +6,10 @@ import { FormatCurrency } from "@/lib/utils/FormatCurrency";
 
 const Kpi = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 my-6">
       <KpiCard
-        KpiCardTitle="Total Orders"
-        KpiCardValue="142"
+        KpiCardTitle="Upcoming Bookings"
+        KpiCardValue="9"
         KpiCardIcon={LuClipboardList}
       />
       <KpiCard
@@ -19,16 +19,16 @@ const Kpi = () => {
         KpiBackgroundIcon="bg-icon-background-orange"
       />
       <KpiCard
-        KpiCardTitle="Completed Orders"
+        KpiCardTitle="Active Customers"
         KpiCardIcon={FaCheckDouble}
         KpiCardValue="114"
         KpiBackgroundIcon="bg-icon-background-check"
 
       />
       <KpiCard
-        KpiCardTitle="Outstanding Payments"
+        KpiCardTitle="Total Revenue"
         KpiCardIcon={MdOutlinePayments}
-        KpiCardValue={FormatCurrency(500000)}
+        KpiCardValue={FormatCurrency(50000)}
         KpiBackgroundIcon="bg-icon-background-money"
 
       />

@@ -31,7 +31,6 @@ const Nav = () => {
   function handleToggleNav() {
     setNavOpen((prev) => !prev);
   }
-  console.log(me);
 
   return (
     <>
