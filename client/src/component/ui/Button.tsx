@@ -1,10 +1,12 @@
 import React from "react";
+import { IconType } from "react-icons";
 
 type ButtonProps = {
   children: React.ReactNode;
   variant?: "sm" | "md" | "full";
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  Icon: IconType;
   disabled?: boolean;
   showIcon?: boolean;
 };
@@ -16,6 +18,7 @@ const Button = ({
   type = "button",
   disabled = false,
   showIcon = false,
+  Icon,
 }: ButtonProps) => {
   const variants = {
     sm: "w-fit px-4",
@@ -28,8 +31,9 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`h-11 rounded-md bg-primary text-sm font-semibold text-white cursor-pointer ${variants[variant]} disabled:cursor-not-allowed disabled:opacity-50`}
+      className={`h-11 rounded-md bg-primary text-sm font-semibold flex items-center gap-2 text-white cursor-pointer ${variants[variant]} disabled:cursor-not-allowed disabled:opacity-50`}
     >
+      {showIcon && <Icon className="text-xl" />}
       {children}
     </button>
   );

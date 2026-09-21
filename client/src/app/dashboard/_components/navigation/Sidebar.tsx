@@ -1,16 +1,23 @@
 import Logo from "@/component/ui/Logo";
 import React from "react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { LuLogOut } from "react-icons/lu";
 import { useBusinessBySlug } from "@/hooks/useBusinessBySlug";
 import SideNavLinks from "../SidebarLinks";
+import { useAuth } from "@/hooks/authStore";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const { slug } = useParams();
   const { business } = useBusinessBySlug(slug);
   const sidebarNavigation = SideNavLinks();
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
   return (
     <section className="bg-background-sidebar w-[30%] xl:w-[16%] 2xl:w-[15%] text-background not-md:hidden h-screen sticky top-0">
       <div className="flex flex-col h-full justify-between">
@@ -61,7 +68,10 @@ const Sidebar = () => {
                 </Link>
               );
             })}
-          <div className="text-muted-foreground rounded-lg font-xs flex items-center gap-2">
+          <div
+            className="cursor-pointer text-muted-foreground rounded-lg font-xs flex items-center gap-2"
+            onClick={handleLogout}
+          >
             <LuLogOut className="font-extrabold" />
             <span className="text-xs">Logout {business?.business_name}</span>
           </div>

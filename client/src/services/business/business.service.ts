@@ -15,7 +15,6 @@ export class BusinessService {
   static async getBusinessBySlug(slug: ParamValue) {
     const request = await api.get(`/business/${slug}`);
 
-    console.log(request.data);
     if (request.status != 200) {
       throw new Error(request?.data?.error);
     }

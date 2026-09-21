@@ -18,7 +18,6 @@ const LoginForm = () => {
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = await login({ email, password });
-    console.log(result);
 
     if (result.success) {
       router.push("/dashboard/my-businesses");
