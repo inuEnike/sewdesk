@@ -3,6 +3,7 @@ import OutlineButton from "@/component/ui/OutlineButton";
 import Link from "next/link";
 import React from "react";
 import { IconType } from "react-icons";
+import { IoAirplane } from "react-icons/io5";
 import { LuCircleCheck } from "react-icons/lu";
 import { PiShieldCheckFill } from "react-icons/pi";
 
@@ -58,9 +59,9 @@ const PricingCard = ({
         </ul>
 
         {title === "Freemium" || title === "SewDesk Pro" ? (
-          <OutlineButton children={cta} variant="full" />
+          <OutlineButton children={cta} variant="full" Icon={IoAirplane} />
         ) : (
-          <Button children={cta} variant="full" />
+          <Button children={cta} variant="full" Icon={IoAirplane}/>
         )}
       </div>
     </div>

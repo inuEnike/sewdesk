@@ -1,6 +1,7 @@
 import Button from "@/component/ui/Button";
 import Link from "next/link";
 import { FiPlus } from "react-icons/fi";
+import { GoPlus } from "react-icons/go";
 
 const BusinessHeader = () => {
   return (
@@ -19,8 +20,11 @@ const BusinessHeader = () => {
         </p>
       </div>
 
-      <Link href={"/dashboard/create-business"} className="flex items-center gap-3">
-        <Button children="Create a Business" />
+      <Link
+        href={"/dashboard/create-business"}
+        className="flex items-center gap-3"
+      >
+        <Button children="Create a Business" Icon={GoPlus} showIcon />
       </Link>
     </div>
   );

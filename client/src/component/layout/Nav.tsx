@@ -10,6 +10,8 @@ import { IoClose } from "react-icons/io5";
 import Logo from "../ui/Logo";
 import { useApp } from "@/context/AppContext";
 import { useAuth } from "@/hooks/authStore";
+import { MdDashboard, MdNotStarted } from "react-icons/md";
+import { SiAuth0 } from "react-icons/si";
 
 const Nav = () => {
   const pathName = usePathname();
@@ -62,7 +64,7 @@ const Nav = () => {
                   Log In
                 </Link>
                 <Link href={"/signup"}>
-                  <Button children="Get Started" />
+                  <Button children="Get Started" Icon={MdNotStarted} />
                 </Link>
               </>
             ) : (
@@ -74,7 +76,7 @@ const Nav = () => {
                   Logout
                 </div>
                 <Link href={"/dashboard/my-businesses"}>
-                  <Button children="Dashboard" />
+                  <Button children="Dashboard" Icon={MdDashboard} />
                 </Link>
               </>
             )}
@@ -108,16 +110,16 @@ const Nav = () => {
             </ul>
 
             <ul className="authActions gap-4 flex flex-col items-center pb-2 md:hidden text-[15px]">
-              {me && me === null ? (
+              {me === null ? (
                 <>
                   <Link href={"/login"} className="text-light-text">
                     Log In
                   </Link>
-                  <Button children="Get Started" />
+                  <Button children="Get Started" Icon={SiAuth0} />
                 </>
               ) : (
                 <Link href={"/dashboard/my-businesses"}>
-                  <Button children="Dashboard" />
+                  <Button children="Dashboard" Icon={MdDashboard} />
                 </Link>
               )}
             </ul>
