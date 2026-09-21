@@ -3,17 +3,25 @@
 import Logo from "@/component/ui/Logo";
 import SideNavLinks from "../SidebarLinks";
 
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { LuLogOut } from "react-icons/lu";
 import { CgClose } from "react-icons/cg";
 
 import { useBusinessBySlug } from "@/hooks/useBusinessBySlug";
+import { useAuth } from "@/hooks/authStore";
 
 const MobileSidebar = ({ onclick }: { onclick: () => void }) => {
   const pathname = usePathname();
   const { slug } = useParams();
+  const router = useRouter();
+
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
 
   const { business } = useBusinessBySlug(slug);
 
@@ -98,7 +106,10 @@ const MobileSidebar = ({ onclick }: { onclick: () => void }) => {
               })}
 
             {/* Logout */}
-            <div className="flex items-center gap-2 rounded-lg px-3 font-xs text-muted-foreground">
+            <div
+              className="cursor-pointer text-muted-foreground rounded-lg font-xs flex items-center gap-2"
+              onClick={handleLogout}
+            >
               <LuLogOut className="font-extrabold" />
 
               <span className="text-xs">Logout {business?.business_name}</span>
