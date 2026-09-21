@@ -5,7 +5,7 @@ export const revenueData = [
   },
   {
     month: "Feb",
-    revenue: 450000,
+    revenue: 480000,
   },
   {
     month: "Mar",
@@ -41,7 +41,7 @@ export const revenueData = [
   },
   {
     month: "Nov",
-    revenue: 940000,
+    revenue: 1340000,
   },
   {
     month: "Dec",
