@@ -116,6 +116,9 @@ const Nav = () => {
                     Log In
                   </Link>
                   <Button children="Get Started" Icon={SiAuth0} />
+                  <Link href={"/signup"}>
+                    <Button children="Get Started" />
+                  </Link>
                 </>
               ) : (
                 <Link href={"/dashboard/my-businesses"}>
