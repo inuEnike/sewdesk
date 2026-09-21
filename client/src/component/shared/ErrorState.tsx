@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoReturnDownBackOutline } from "react-icons/io5";
 import { LuCircleAlert } from "react-icons/lu";
 import Button from "../ui/Button";
 import Link from "next/link";
+import { VscVerifiedFilled } from "react-icons/vsc";
+import { MdOutlinePayments } from "react-icons/md";
 
 type ErrorStateProps = {
   title?: string;
@@ -43,15 +45,24 @@ const ErrorState = ({
 
           {needsVerification ? (
             <Link href="/verify" className="my-3 w-full">
-              <Button variant="full">Verify your account</Button>
+              <Button variant="full" Icon={VscVerifiedFilled} showIcon>
+                Verify your account
+              </Button>
             </Link>
           ) : AlreadySubscribed ? (
             <Link href="/dashboard/my-businesses" className="my-3 w-full">
-              <Button variant="full">Go back to pay</Button>
+              <Button variant="full" showIcon Icon={MdOutlinePayments}>
+                Go back to pay
+              </Button>
             </Link>
           ) : (
             <div className="my-3 w-full">
-              <Button variant="full" onClick={onClose}>
+              <Button
+                variant="full"
+                onClick={onClose}
+                Icon={IoReturnDownBackOutline}
+                showIcon
+              >
                 Try again
               </Button>
             </div>

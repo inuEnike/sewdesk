@@ -10,6 +10,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { LuChevronDown, LuListChecks } from "react-icons/lu";
 import ErrorState from "./ErrorState";
+import { FaDoorOpen } from "react-icons/fa6";
 
 type Plan = {
   id: string;
@@ -184,6 +185,8 @@ const Price = () => {
         <div className="mt-6">
           <Button
             onClick={handleContinue}
+            Icon={FaDoorOpen}
+            showIcon
             disabled={!selectedId || !businessId || isSubmitting}
             children={
               isSubmitting ? "Creating subscription..." : "Proceed to payment"
