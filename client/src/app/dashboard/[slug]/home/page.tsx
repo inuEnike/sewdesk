@@ -23,7 +23,7 @@ const Page = () => {
 
   return (
     <main className="px-5 lg:px-12 py-7 lg:py-10">
-      <div className="flex justify-between not-md:flex-col not-md:gap-3">
+      <div className="flex justify-between not-lg:flex-col not-lg:gap-3">
         <div className="">
           <h1 className="text-2xl font-bold">
             {greet}, {getName ? `${getName[0]} ${getName[1]}` : "User"}!👋
