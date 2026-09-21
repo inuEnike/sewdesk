@@ -31,7 +31,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`h-11 rounded-md bg-primary text-sm font-semibold flex items-center gap-2 text-white cursor-pointer ${variants[variant]} disabled:cursor-not-allowed disabled:opacity-50`}
+      className={`h-11 rounded-md bg-primary text-sm font-semibold flex items-center justify-center gap-2 text-white cursor-pointer ${variants[variant]} disabled:cursor-not-allowed disabled:opacity-50`}
     >
       {showIcon && <Icon className="text-xl" />}
       {children}

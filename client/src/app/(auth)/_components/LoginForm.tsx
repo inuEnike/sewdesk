@@ -8,6 +8,8 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import Heading from "./Heading";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/context/AppContext";
+import { CgSpinner } from "react-icons/cg";
+import { BiDoorOpen } from "react-icons/bi";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,9 +50,22 @@ const LoginForm = () => {
           placeholder="**********"
         />
         {loading ? (
-          <Button children="Loading..." variant="full" type="submit" disabled />
+          <Button
+            children="Loading..."
+            variant="full"
+            type="submit"
+            disabled
+            Icon={CgSpinner}
+            showIcon
+          />
         ) : (
-          <Button children="Login" variant="full" type="submit" />
+          <Button
+            children="Access your account"
+            variant="full"
+            type="submit"
+            Icon={BiDoorOpen}
+            showIcon
+          />
         )}
 
         <p className="text-center py-3 text-xs text-light-text font-light">

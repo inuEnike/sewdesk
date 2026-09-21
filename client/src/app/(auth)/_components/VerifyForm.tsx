@@ -8,6 +8,8 @@ import { useAuth } from "@/hooks/authStore";
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import { CgSpinner } from "react-icons/cg";
+import { MdOutlineVerifiedUser } from "react-icons/md";
 
 const VerifyForm = () => {
   const { loading, error, clearError } = useAuth();
@@ -35,12 +37,21 @@ const VerifyForm = () => {
         />
 
         {loading ? (
-          <Button children="Loading..." variant="full" type="submit" disabled />
+          <Button
+            children="Loading..."
+            variant="full"
+            type="submit"
+            disabled
+            Icon={CgSpinner}
+            showIcon
+          />
         ) : (
           <Button
             children="Request Verification link"
             variant="full"
             type="submit"
+            Icon={MdOutlineVerifiedUser}
+            showIcon
           />
         )}
       </div>
