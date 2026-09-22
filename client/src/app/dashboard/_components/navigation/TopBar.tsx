@@ -13,6 +13,7 @@ const TopBar = ({
 }) => {
   const { business } = useBusinessBySlug(slug);
   const { isOnline } = useOnlineStatus();
+
   return (
     <nav className="bg-white px-7 lg:px-12 py-5 shadow-xs flex items-center justify-between sticky top-0">
       <div className="flex items-center gap-4">
