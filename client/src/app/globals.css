@@ -2,55 +2,91 @@
 
 :root {
   --background: #f9fafb;
-  
   --foreground: #111827;
 
   --card: #ffffff;
-
   --card-foreground: #111827;
 
   --ferra: #1e3a8a;
-  
   --ferra-foreground: #ffffff;
 
   --footer: #111827;
 
   --primary: #2563eb;
-
   --primary-foreground: #ffffff;
 
   --muted: #f3f4f6;
-
   --muted-foreground: #64748b;
 
   --danger: #DC2626;
 
   --light-text: #4b5563;
-  
+
   --icon-color: #2563EB;
-  
+
   --text-light-small: #6B7280;
 
   --digit-color: #c7dbf2cb;
 
   --border: #e5e7eb;
-  
+
   --icon-background: #eff6ff;
-
   --icon-background-orange: #FEF3C7;
-
   --icon-background-check: #D1FAE5;
-  
   --icon-background-money: #FEE2E2;
 
   --emrald-primary: #059669;
 
-
-  --footer-icon:  #374151;
+  --footer-icon: #374151;
 
   --background-sidebar: #172554;
-  
+
   --background-secondary: #f5f7f8;
+}
+
+/* Dark theme */
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+
+  --ferra: #1e3a8a;
+  --ferra-foreground: #ffffff;
+
+  --footer: #020617;
+
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+
+  --danger: #ef4444;
+
+  --light-text: #cbd5e1;
+
+  --icon-color: #60a5fa;
+
+  --text-light-small: #94a3b8;
+
+  --digit-color: #334155;
+
+  --border: #334155;
+
+  --icon-background: #172554;
+  --icon-background-orange: #451a03;
+  --icon-background-check: #064e3b;
+  --icon-background-money: #450a0a;
+
+  --emrald-primary: #10b981;
+
+  --footer-icon: #1e293b;
+
+  --background-sidebar: #020617;
+
+  --background-secondary: #111827;
 }
 
 @theme inline {
@@ -84,9 +120,9 @@
   --color-icon-background-orange: var(--icon-background-orange);
 
   --color-icon-background-check: var(--icon-background-check);
-  
+
   --color-icon-background-money: var(--icon-background-money);
-  
+
   --color-icon-color: var(--icon-color);
 
   --color-background-sidebar: var(--background-sidebar);
@@ -98,6 +134,7 @@
   --color-digit-color: var(--digit-color);
 
   --font-sans: var(--font-inter);
+
   --color-emerald-primary: var(--emrald-primary);
 }
 

@@ -47,7 +47,7 @@ const AddBusinessForm = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      await BusinessService.createBusiness(formData);
+      await BusinessService.createBusiness({ ...formData, slug: slugName });
       setIsLoading(false);
 
       alert("Business Added Successfully");
