@@ -32,7 +32,7 @@ const Page = () => {
       <div className="flex justify-between not-lg:flex-col not-lg:gap-3">
         <div className="">
           <h1 className="text-2xl font-bold">
-            {greet}, {getName ? `${getName[0]} ${getName[1]}` : "User"}!👋
+            {greet}, <span className="text-primary"> {getName ? `${getName[0]} ${getName[1]}` : "User"}!</span>👋
           </h1>
           <p className="text-light-text text-xs not-mdfont-light md:text-sm py-1">
             Here is the latest snapshot of your{" "}

@@ -33,7 +33,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     setToggleSIdeBar((prev) => !prev);
   };
   return (
-    <section className="bg-icon-background w-full h-auto flex">
+    <section className="bg-background w-full h-auto flex">
       {toggleSideBar && (
         <div className="">
           <MobileSidebar onclick={handleToggleSideBar} />
