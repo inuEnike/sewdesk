@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Input from "@/component/ui/Input";
@@ -19,6 +19,16 @@ const AddBusinessForm = () => {
     whatsapp_number: "",
     description: "",
   });
+
+  let slugName = formData.business_name
+    ?.split(" ")
+    .map((name) => name)
+    .join("-")
+    .replace(/[^a-zA-Z0-9\s-]/g, "") // remove symbols
+    .replace(/\s+/g, "-") // spaces -> -
+    .replace(/-+/g, "-") // multiple - -> single -
+    .replace(/^-|-$/g, ""); // remove - from beginning/end;
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -93,7 +103,8 @@ const AddBusinessForm = () => {
         placeholder="daniel-couture"
         name="slug"
         onChange={handleChange}
-        value={formData.slug}
+        disabled
+        value={slugName?.toLowerCase()}
       />
 
       <div className="flex gap-2 not-md:block items-center">

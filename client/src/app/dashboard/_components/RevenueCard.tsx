@@ -21,7 +21,7 @@ const RevenueCard = () => {
           </p>
         </div>
         <div>
-          <p className="text-primary font-bold text-md">€24,850 Total</p>
+          <p className="text-primary font-bold text-md">₦24,850 Total</p>
         </div>
       </div>
 
