@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Ref, useState } from "react";
 import { LuEye } from "react-icons/lu";
 import { PiEyeClosedLight } from "react-icons/pi";
 
@@ -9,6 +9,7 @@ type InputProps = {
   label: string;
   inputType?: React.HTMLInputTypeAttribute;
   placeholder: string;
+  disabled?: boolean;
   isLogin?: boolean;
   name?: string;
   isTextArea?: boolean;
@@ -24,6 +25,7 @@ const Input = ({
   inputType = "text",
   placeholder,
   isLogin,
+  disabled,
   isTextArea = false,
   name,
   onChange,
@@ -70,6 +72,7 @@ const Input = ({
             type={inputType === "password" && password ? "text" : inputType}
             className="w-full py-3 px-2 outline-0 text-sm text-light-text bg-transparent"
             onChange={onChange}
+            disabled={disabled}
             name={name}
             required
             value={value}

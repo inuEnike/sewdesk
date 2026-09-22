@@ -9,7 +9,7 @@ const page = () => {
 
   return (
     <>
-      <div className="mx-10 mt-5">
+      <div className="not-md:px-3 md:mx-10 mt-5">
         <button
           className="flex items-center gap-3 cursor-pointer mt-7"
           onClick={router.back}
@@ -18,7 +18,7 @@ const page = () => {
           <span className="text-light-text text-sm">Go back</span>
         </button>
       </div>
-      <section className="flex justify-center items-center h-auto not-md:my-10">
+      <section className="flex justify-center items-center h-auto ">
         <div className="md:bg-white w-full md:w-170 md:shadow-xs md:px-5 md:rounded-xl py-7 not-md:mx-3">
           <Logo />
           <div className="py-3">
