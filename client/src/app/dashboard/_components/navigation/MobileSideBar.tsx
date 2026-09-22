@@ -28,8 +28,8 @@ const MobileSidebar = ({ onclick }: { onclick: () => void }) => {
   const sidebarNavigation = SideNavLinks();
 
   return (
-    <section className="fixed inset-0 z-50 bg-background/70">
-      <div className="relative h-screen w-[65%] bg-background-sidebar text-background md:hidden">
+    <section className="fixed inset-0 z-50 bg-background/70 md:hidden">
+      <div className="relative h-screen w-[65%] bg-background border-r border-border text-background">
         {/* Close button */}
         <button
           className="absolute -right-7 top-5 z-50 px-1 py-2"
@@ -42,7 +42,7 @@ const MobileSidebar = ({ onclick }: { onclick: () => void }) => {
         <div className="h-full overflow-y-auto scrollbar-hidden flex flex-col justify-between">
           {/* Main navigation */}
           <div className="mx-4 my-5 md:mx-7 md:my-7">
-            <Logo isDark />
+            <Logo />
 
             <nav>
               <div className="mt-10 flex flex-col gap-7">
@@ -77,7 +77,6 @@ const MobileSidebar = ({ onclick }: { onclick: () => void }) => {
 
           {/* Secondary navigation */}
           <div className="mx-4 mb-3 mt-10 flex flex-col gap-7">
-            <hr className="text-muted-foreground" />
 
             {sidebarNavigation
               .filter((item) => item.section === "secondary")

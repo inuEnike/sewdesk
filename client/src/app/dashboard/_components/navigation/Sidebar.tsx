@@ -19,10 +19,10 @@ const Sidebar = () => {
     router.push("/login");
   };
   return (
-    <section className="bg-background-sidebar w-[30%] xl:w-[16%] 2xl:w-[15%] text-background not-md:hidden h-screen sticky top-0">
+    <section className="bg-white border-r border-border w-[30%] xl:w-[16%] 2xl:w-[15%] text-background not-md:hidden h-screen sticky top-0">
       <div className="flex flex-col h-full justify-between">
         <div className="mx-5 md:mx-5 my-5 md:my-7">
-          <Logo isDark />
+          <Logo />
           <nav>
             <div className="flex flex-col gap-7 mt-10">
               {sidebarNavigation
